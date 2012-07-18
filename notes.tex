@@ -1,0 +1,128 @@
+\documentclass[german,12pt,a4paper]{article}
+\usepackage{fullpage}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
+\usepackage{subfig}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+\frenchspacing
+
+\newcommand{\comments}[1]{}
+\renewcommand{\baselinestretch}{1.55}
+
+%Redefine the first level
+\renewcommand{\theenumi}{\textbf{\alph{enumi})}}
+\renewcommand{\labelenumi}{\theenumi}
+
+\begin{document}
+
+\title{\textbf{Notes SMS}}
+\author{Sebastian Menski (734272), Martin Ohmann (734801) \\ \texttt{\{menski,ohmann\}@uni-potsdam.de}}
+\date{\today}
+
+\maketitle
+
+\section{SMS traditionell}
+\subsection{SMS-Spezifikation}
+\begin{itemize}
+	\item Verwaltung durch Short Message Service Center (SMSC) des Providers
+	\item SMSC kann SMS an mobile Endgeräte senden, maximale Payload 140 octets (8-bit Tupel)
+		\begin{itemize}
+			\item 7-bit encoding: 160 chars
+			\item 8-bit encoding: 140 chars
+			\item 16-bit encoding: 70 chars
+		\end{itemize}
+	\item SMS können auch dazu benutzt werden Binärdaten zu senden, spezielle Anwendungen auf 
+		dem Telefon übernehmen die Verarbeitung dieser, Beispiele:
+		\begin{itemize}
+			\item Klingelton-Download
+			\item Austausch von Bildnachrichten
+			\item Change look and feel of the handset's GUI
+		\end{itemize}		
+	\item System kann überlange Nachrichten segmentieren; mehrere SMS werden gesendet, Teil der Payload jeder
+		dieser SMS wird für nutzerspezifischen Header für Sequenzinformationen verwendet
+	\item SMSC arbeiten entweder nach store-and-forward oder forward-and-forget Prinzip:
+		\begin{itemize}
+			\item store-and-forward: System versucht Nachricht für eine festgelegte 
+				Vorhaltezeit (meist 48h bis 7 Tage) nachzusenden, bis diese erfolgreich beim Empfänger 
+				eingetroffen ist. Nachrichten, die innerhalb der Vorhaltezeit nicht zugestellt werden 
+				konnten, werden vom SMSC gelöscht.
+			\item forward-and-forget: Nachricht wird direkt an den Empfänger weitergeleitet, ohne Prüfung, ob 
+				dieser die Nachricht erhalten hat und ohne Nachsenden im Fehlerfall
+		\end{itemize}	
+	\item SMS Protocol Stack besteht aus 4 Schichten:
+		\begin{itemize}
+			\item application layer
+			\item transfer layer
+			\item relay layer
+			\item link layer
+		\end{itemize}		
+	\item \textit{Beispiel einer Transfer protocol data unit (SMS-Aufbau) anführen (Computer-SMS\_pdf.pdf, Table 1)}
+\end{itemize}
+
+\subsection{Shortcodes}
+\begin{itemize}
+	\item Abgekürzte Nummer (4-6 Ziffern) als ``Adresse'' für SMS
+	\item Nur im Netz des Providers gültig, oder in den Netzen mehrerer Provider gültig (allgemeine shortcodes)
+	\item Können dazu genutzt werden Nachrichten von oder an Nutzer in mehreren Mobilfunknetzen zu senden.
+	\item Provider senden oft Informations-SMS unter Verwendung von nur im eigenen Netzwerk gültigen Shortcodes
+	\item Shortcodes können angemietet werden und dem Nutzer kann es erlaubt sein, Keywords an diese zu senden, um 
+		damit eine Aktion auszulösen (z.B. Klingelton-Download)
+	\item Shortcodes können vom Mobilfunkvertrag abweichende Kosten haben, diese werden in der Telefonabrechnung 
+		erfasst.
+\end{itemize}
+
+\subsection{Email-Gateway}
+\begin{itemize}
+	\item manche Provider bieten Email-to-SMS gateways an
+	\item Email an 1234567890@provider.de löst SMS an 1234567890 aus
+\end{itemize}
+
+\subsection{SMS centers (SMSC)}
+\begin{itemize}
+	\item SMS-Nachrichten werden vo Telefon über Funk via Funkturm der Mobilfunkzelle an das SMSC des Providers 
+		gesendet
+	\item Die Zugriffsprotokolle des SMSC erlauben Interaktion zwischen zwei SMSCs oder zwischen Externen Shortmessage 
+		Entities (SMEs) und einem SMSC.
+	\item SMEs sind sind Software Anwendungen auf Netzwerkkomponenten (z.B. mobile handsets) oder Hardware-Geräte, welche 
+		SMS senden und empfangen können
+	\item Short Message Peer-to-Peer (SMPP) Protocol erlaubt Interaktion zwischen externen SMEs und SMSCs 
+		verschiedener Hersteller.
+	\item \textit{Grafik SMSC, SMPP, SMS Broker anführen (Computer-SMS\_pdf.pdf, Figure 1)}
+\end{itemize}
+
+\subsection{Message aggregators}
+\begin{itemize}
+	\item Provider kommunizieren in der Regel nicht direkt mit SMSCs, sondern nutzen einen SMS Broker (oder message aggregator)
+	\item Ein Aggregator ist eine Wirtschaftseinheit, welcher Verträge mit Netzwerk-Providern aushandelt und als Mittelsmann
+		Zugang zu Mobilfunknetzen zur Nachrichtenübertragung für Dritte ohne direkte Beziehung zum Mobilfunknetzwerk gewährt. 
+	\item Der Aggregator nutzt SMPP um Verbindungen mit Provider-Mobilfunknetzwerken aufrechtzuerhalten.
+	\item Aggregatoren bieten Zugriff auf ihre Server typischerweise über SMPP oder kundenspezifische APIs an.
+	\item \textit{Grafik SMSC, SMPP, SMS Broker anführen (Computer-SMS\_pdf.pdf, Figure 1)}
+\end{itemize}
+
+\subsection{SMS-Versand in Deutschland, Statistiken}
+\begin{itemize}
+	\item SMS mittlerweile fast 20 Jahre alt (erste SMS überhaupt wurde am 3. Dezember 1992 verschickt)
+	\item \textit{1999 - 2007, Grafik anfügen http://www.bitkom.org/de/presse/49919\_49417.aspx}
+	\item \textit{2006 - 2011, Grafik anfügen http://www.bitkom.org/de/presse/64046\_67951.aspx}
+	\item 2010: 1300 SMS pro Sekunde (78k/min)
+	\item Stand 2011: 83\% aller Deutschen ab 14 Jahren besitzen ein Mobiltelefon: ca. 59Mio.
+\end{itemize}
+
+\subsection{SMS-Versand über GSM/GPRS}
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\end{document}
