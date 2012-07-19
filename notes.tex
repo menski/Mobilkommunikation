@@ -53,10 +53,10 @@
 		dieser SMS wird für nutzerspezifischen Header für Sequenzinformationen verwendet
 	\item SMSC arbeiten entweder nach store-and-forward oder forward-and-forget Prinzip:
 		\begin{itemize}
-			\item store-and-forward: System versucht Nachricht für eine festgelegte 
+			\item store-and-forward: System versucht Nachricht regelmäßig für eine festgelegte 
 				Vorhaltezeit (meist 48h bis 7 Tage) nachzusenden, bis diese erfolgreich beim Empfänger 
 				eingetroffen ist. Nachrichten, die innerhalb der Vorhaltezeit nicht zugestellt werden 
-				konnten, werden vom SMSC gelöscht.
+				konnten, werden vom SMSC gelöscht. Ist Empfängernummer dem SMSC unbekannt, lehnt es diese sofort ab.
 			\item forward-and-forget: Nachricht wird direkt an den Empfänger weitergeleitet, ohne Prüfung, ob 
 				dieser die Nachricht erhalten hat und ohne Nachsenden im Fehlerfall
 		\end{itemize}	
@@ -68,6 +68,24 @@
 			\item link layer
 		\end{itemize}		
 	\item \textit{Beispiel einer Transfer protocol data unit (SMS-Aufbau) anführen (Computer-SMS\_pdf.pdf, Table 1)}
+\end{itemize}
+
+\subsection{Übertragung}
+\begin{itemize}
+	\item SMS nutzt einen Signalisierungskanel des GSM-Standards wie etwa SDCCH (Stand-alone Dedicated Control Channel) 
+		oder FACCH (Fast Associated Control Channel). Diese Kanäle werden auch genutzt, um Gespräche aufzubauen und zu 
+		halten.
+	\item Kurzmitteilungen können parallel zu Telefongesprächen empfangen/gesendet werden. Teil der Bandbreite des 
+		Verkehrsdatenkanals wird hier temporär zum Signailiserungskanal (SACCH) umkonfiguriert.
+\end{itemize}
+
+\subsection{Nachrichtentypen}
+\begin{itemize}
+	\item Flash Message: erscheint direkt auf Display; die meisten Mobiltelefone können solche Nachrichten nicht speichern,
+		Beispiel: Anzeige des Restguthabens direkt nach einem Gespräch.
+	\item Silent Message: erscheinen weder auf dem Display noch durch akkustisches Signal. 
+		Wird z.B. von Polizei zur Personenortung genutzt.
+	\item Concatenated Message: Mehrere Kurzmitteilungen werden zu einer Nachricht zusammengestellt.
 \end{itemize}
 
 \subsection{Shortcodes}
@@ -116,13 +134,20 @@
 	\item SMS mittlerweile fast 20 Jahre alt (erste SMS überhaupt wurde am 3. Dezember 1992 verschickt)
 	\item \textit{1999 - 2007, Grafik anfügen http://www.bitkom.org/de/presse/49919\_49417.aspx}
 	\item \textit{2006 - 2011, Grafik anfügen http://www.bitkom.org/de/presse/64046\_67951.aspx}
-	\item 2010: 1300 SMS pro Sekunde (78k/min)
+	\item 2000: 11,4 Mrd. SMS
+	\item 2005: \textgreater 22 Mrd. SMS
+	\item 2010: \textgreater 41 Mrd. SMS, 1300 SMS pro Sekunde (78k/min)
 	\item Stand 2011: 83\% aller Deutschen ab 14 Jahren besitzen ein Mobiltelefon: ca. 59Mio.
 \end{itemize}
 
-\subsection{SMS-Versand über GSM/GPRS}
+\subsection{MMS}
 \begin{itemize}
-	\item 
+	\item nutzt Multimedia Messaging Service Center (MMSC)
+	\item Übertragung über GPRS, Kommunikation mit Endgerät über WAP
+	\item Spezifikation beinhaltet Schnittstellen zur Kommunikation mit E-Mail-Gateways und anderen MMSCs, die auf 
+		SMTP beruhen; zur Komm. mit Value Added Services (VAS) wird SOAP verwendet
+	\item Kodierung des Nachrichtenbodies basiert auf MIME
+	\item MMS im Vergleich zu SMS viel stärker an E-Mail angelehnt
 \end{itemize}
 
 \end{document}
