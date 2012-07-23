@@ -67,7 +67,7 @@
 			\item relay layer
 			\item link layer
 		\end{itemize}		
-	\item \textit{Beispiel einer Transfer protocol data unit (SMS-Aufbau) anführen (Computer-SMS\_pdf.pdf, Table 1)}
+	\item \textit{Beispiel einer Transfer protocol data unit (SMS-Aufbau) anführen \\(Computer-SMS\_pdf.pdf, Table 1)}
 \end{itemize}
 
 \subsection{Übertragung}
@@ -116,7 +116,7 @@
 		SMS senden und empfangen können
 	\item Short Message Peer-to-Peer (SMPP) Protocol erlaubt Interaktion zwischen externen SMEs und SMSCs 
 		verschiedener Hersteller.
-	\item \textit{Grafik SMSC, SMPP, SMS Broker anführen (Computer-SMS\_pdf.pdf, Figure 1)}
+	\item \textit{Grafik SMSC, SMPP, SMS Broker anführen \\(Computer-SMS\_pdf.pdf, Figure 1)}
 \end{itemize}
 
 \subsection{Message aggregators}
@@ -126,7 +126,95 @@
 		Zugang zu Mobilfunknetzen zur Nachrichtenübertragung für Dritte ohne direkte Beziehung zum Mobilfunknetzwerk gewährt. 
 	\item Der Aggregator nutzt SMPP um Verbindungen mit Provider-Mobilfunknetzwerken aufrechtzuerhalten.
 	\item Aggregatoren bieten Zugriff auf ihre Server typischerweise über SMPP oder kundenspezifische APIs an.
-	\item \textit{Grafik SMSC, SMPP, SMS Broker anführen (Computer-SMS\_pdf.pdf, Figure 1)}
+	\item \textit{Grafik SMSC, SMPP, SMS Broker anführen \\(Computer-SMS\_pdf.pdf, Figure 1)}
+\end{itemize}
+
+\subsection{SMS Technische Realisierung über GSM}
+\begin{itemize}
+	\item Realisiert durch den Mobile Application Part (MAP) des SS\#7 Protokolls (Signaling System No. 7)
+	\item Elemente des Short Message Protokolls werden als Felder innerhalb von MAP Nachrichten 
+		durch das Netzwerk transportiert
+	\item Vier MAP Prozeduren zur Kontrolle des Short Message Services:
+		\begin{itemize}
+			\item Mobile Originated (MO) short message service transfer
+			\item Mobile Terminated (MT) short message service transfer
+			\item Short message alert procedure
+			\item Short message waiting data set procedure
+		\end{itemize}
+\end{itemize}
+
+\subsubsection{MO short message service transfer}
+\begin{itemize}
+	\item Immer wenn ein Nutzer eine SMS versendet, wir diese zunächst zum 
+		VMSC/SGSN (Mobile Switching Center/GRPS Core Network) geschickt
+	\item Neben der Textnachricht werden Zieladresse und die Adresse des 
+		SMSCs übermittelt (Addresse des SMSCs in der Telefonkonfiguration der SIM-Karte 
+		definiert)
+	\item VMSC/SGSN ruft MAP service package MAP\_MO\_FORWARD\_SHORT\_MESSAGE auf um 
+		Nachricht an das spezifizierte Interworking MSC des Service Centers zu senden
+	\item Der Service sendet die mo-ForwardSM MAP Operation an das SMSC, welches 
+		in der Nachricht angegeben wurde. Eingebettet in Transaction Capabilities Application
+		Part (TCAP). Tranport zum Core Network erfolgt über den Signaling Ceonnection 
+		Control Prt (SCCP)
+	\item Nach Erhalt der MAP mo-ForwardSM Nachricht gibt das Interworking MSC des SMSC die 
+		SMS-PP Application Protocal Data Unit (APDU) (beinhaltet den Nachrichtentext) an 
+		das zuständige Service Center des SMSC weiter. Hier wird sie gespeichert und 
+		anschließend versucht an die Zieladresse auszuliefern. SC gibt Bestätigung von 
+		Fehler der Erfolg zurück.
+	\item Nach Erhalt des Submission Satus vom SC sendet das Interworking MSC eine 
+		Benachrichtung zurück an das VMSC/SGSN des Senders, von dort aus wird die 
+		Benachrichtigung über Funk an den Sender ausgeliefert
+	\item \textit{Grafik MO anfügen \\(http://en.wikipedia.org/wiki/Short\_message\_service\_technical\_realisation\_(GSM))}
+\end{itemize}
+
+\subsubsection{MT short message service transfer}
+\begin{itemize}
+	\item Wenn SMSC feststellt, dass es eine SMS ausliefern soll, dann sendet es die 
+		SMS-PP APDU der an die Gateway MSC (GMSC) Kompomente des SMSC.
+	\item Das GMSC muss nach dem Empfangen der Nachricht die Position des Empfängers 
+		herausfinden (in diesem Zusammenhang ist der Begriff Gateway MSC ein MSC das 
+		Routing Informationen aus dem Home Location Register (HLR) bezieht). 
+		Dies geschieht, indem das GMSC das MAP service package \\
+		MAP\_SEND\_ROUTING\_INFO\_FOR\_SM aufruft, welches eine \\ sendRoutingInfoForSM 
+		(SRI-for-SM) MAP Nachricht an das HLR der Zielnummer sendet, um die 
+		aktuelle Position des Empfängers anzufragen
+	\item Die SRI-for-SM-Nachricht kann entweder an ein HLR im gleichen Netzwerk, oder 
+		aber über eine Verbindung zu einem HLR in einem fremden PLMN (Public land mobile 
+		network), gesendet werden (je nachdem zu welchem Netzwerk der Empfänger gehört)
+	\item Das HLR macht einen Database lookup und sendet Daten zur aktuellen Position des 
+		Empfängers an das GMSC des SMSCs zurück. Diese Positionsdaten können entweder die 
+		Adresse des MSC sein, über welches der Empfänger gerade erreichbar ist, die 
+		SGSN Adresse, oder beides. Das HLR kann ebenfalls eine Fehlermeldung zurücksenden, 
+		falls der Empfänger nicht für Kurznachrichten geeignet ist.
+	\item Sobald das GMSC die Routing Informationen erhalten hat, versucht des die 
+		Nachricht an den Empfänger zu übermitteln. Dies geschieht durch Aufrufen des \\
+		MAP\_MT\_FORWARD\_SHORT\_MESSAGE services, welcher eine \\ 
+		MAP mt-ForwardSM Nachricht 
+		an die vom HLR bereitgestellte Adresse sendet. Dabei ist es egal, ob es 
+		sich hierbei um ein MSC oder SGSN handelt
+	\item Das VMSC fragt die benötigten Informationen zum Ausliefern der Nachricht beim VLR 
+		durch eine Send\_Info\_for\_MS\_SMS Nachricht ab. Das VLR sucht daraufhin nach dem 
+		Empfänger und liefert die Mobile Subscriber ISDN Number (MSISDN) des Empfängers an 
+		das VMSC zurück (im Fehlerfall wird Fehlermeldung gesendet; in diesem Fall wird 
+		Auslieferung der SMS abgebrochen und beim SMSC gemeldet. Im Erfolgsfall sendet das VMSC Erflogsnachricht an SMSC)
+	\item GMSC Komponente des SMSC reicht das Ergebnis des Zustellungsversuchs an das SC 
+		weiter. Im Erfolgsfall wird die Nachricht aus der Store and Forward Engine (SFE) 
+		entfernt und, falls angefordert, ein Zustellreport an den Sender geschickt.
+	\item Bei einem gescheiterten Zustellungsveruch versucht das SMSC periodisch die 
+		Nachricht für eine bestimmte Vorhaltezeit zuzustellen; SMSC registiert sich 
+		eventuell beim HLR, um über die Verfügbarkeit des Empfängers benachrichtigt zu 
+		werden.
+	\item \textit{Grafik MT anfügen \\(http://en.wikipedia.org/wiki/Short\_message\_service\_technical\_realisation\_(GSM))}
+\end{itemize}
+
+\subsubsection{Failed short message delivery}
+\begin{itemize}
+	\item Text
+\end{itemize}
+
+\subsubsection{MAP Transport Protocols}
+\begin{itemize}
+	\item Text
 \end{itemize}
 
 \subsection{SMS-Versand in Deutschland, Statistiken}
