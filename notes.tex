@@ -68,6 +68,36 @@
 			\item link layer
 		\end{itemize}		
 	\item \textit{Beispiel einer Transfer protocol data unit (SMS-Aufbau) anführen \\(Computer-SMS\_pdf.pdf, Table 1)}
+	\item Beispiel der Transfer protocol data unit: 
+		\small{\texttt{07 91 72 83 01 00 10 F5 04 0B C8 72 38 88 09 00 F1 00 00 99 30 92 51 61 95 80 0A E8 32 9B FD 46 97 D9 EC 37}}
+		
+		\begin{tabular}{ p{4cm} | p{10cm} }
+			Oktett(s) & Beschreibung \\
+			\hline \hline
+		  	 07 & Länge der SMSC-Informationen (hier 7 Oktetts) \\ 
+		  	 \hline
+		  	 91 & Typ der SMSC-Adresse (91 bedeutet internationales Telefonnummernformat) \\ 
+		  	 \hline
+		  	 72 83 01 00 10 F5 & SMSC-Nummer (hier +27381000015) \\ 
+		  	 \hline
+		  	 04 & Erstes Oktett dieser SMS-DELIVER message \\ 
+		  	 \hline
+		  	 0B & Länge der Adresse/Nummer des Senders (0B$_{16}$ = 11$_{10}$) \\ 
+		  	 \hline
+		  	 C8 & Typ der Sender-Adresse \\ 
+		  	 \hline
+		  	 72 38 88 09 00 F1 & Sender-Nummer (hier +27838890001) \\ 
+		  	 \hline
+		  	 00 & Protocol identifier (00 = SME-to-SME Protokoll -- implizit) \\ 
+		  	 \hline
+		  	 00 & Datenkodierung (00 = 7 bit, 01 = 8 bit, 10 = 16 bit, 11 = reserviert) \\ 
+		  	 \hline
+		  	 99 30 92 51 61 95 80 & Zeitstempel \\ 
+		  	 \hline
+		  	 0A & Nutzdatenlänge/Länge der Nachricht \\ 
+		  	 \hline
+		  	 E8 32 9B FD 46 97 D9 EC 37 & Nachricht "hellohello", 8-bit Oktetts representiert als 7-bit Daten
+		\end{tabular}
 \end{itemize}
 
 \subsection{Übertragung}
@@ -209,12 +239,36 @@
 
 \subsubsection{Failed short message delivery}
 \begin{itemize}
-	\item Text
+	\item Falls das VMSC/SGSN einen Fehler bei der Auslieferung anzeigt, dann sendet das SMSC mit Hilfe der MAP Prozedur 
+		MAP\_REPORT\_SM\_DELIVERY\_STATUS eine Nachricht an das HLR, welche den Grund des Fehlers angibt und zusätzlich 
+		eine Anfrage zur automatischen Benachrichtigung des SMSC durch das HLR über die Verfügbarkeit der Zieladresse stellt.
+	\item Das HLR setzt ein Flag für den Zielaccount, welches angibt, dass dieser momentan für die Übermittlung von Kurznachrichten 
+		nicht verfügbar ist ud speichert die Adresse das SMSCs in der Message Waiting Data (MWD) Liste des Ziels.
+	\item Gültige Flags:
+		\begin{itemize}
+			\item Mobile Not Reachable Flag (MNRF)
+			\item Memory Capacity Exceeded Flag (MCEF)
+			\item Mobile Not Reachable for GPRS (MNRG)
+		\end{itemize}
+	\item Ab diesem Zeitpunkt antwortet das HLR auf SRI-for-SM Requests mit einem Fehler und fügt die Adressen der anfragenden 
+		SMSCs automatisch der MWD Liste des Ziels hinzu (wenn SRI-for-SM Request ein gesetztes Priority-Flag hat, dann antwortet 
+		das HLR mit der VLR-Adresse, falls verfügbar).
+	\item Das HLR kann auf verschiedenen Wegen über die erneute Verfügbarkeit für Kurznachrichten eines Teilnehmers informiert werden:
+		\begin{itemize}
+			\item Teilnehmer wurde vom Netzwerk getrennt, eine Neuverbindung löst ein Location Update beim HLR aus.
+			\item Teilnehmer befand sich in ``Funkloch'', wurde jedoch nicht komplett vom Netzwerk getrennt. Beim erneuten Eintritt in 
+				einen abgedeckten Netzbereich antwortet es auf Page Requests des VLRs. Das VLR sendet daraufhin eine Ready-for-SM Nachricht 
+				an das HLR
+			\item Wenn der Telefonspeicher voll war und der Teilnehmer daraufhin einige Nachrichten löscht, so wird eine Ready-for-SM 
+				Nachricht vom VMSC/VLR an das HLR gesendet.
+		\end{itemize}
+	\item Sobald HLR über die erneute Verfügbarkeit des Teilnehmers informiert wurde, sendet es eine AlertSC MAP message an jedes 
+		in der MWD Liste des Teilnehmers registrierte SMSC, wodurch der SMS-Zustellprozess erneut gestartet wird.
 \end{itemize}
 
 \subsubsection{MAP Transport Protocols}
 \begin{itemize}
-	\item Text
+	\item TODO for Paper
 \end{itemize}
 
 \subsection{SMS-Versand in Deutschland, Statistiken}
