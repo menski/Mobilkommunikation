@@ -51,6 +51,11 @@
 		(mit dem Text »Merry Christmas«) von einem PC an ein Mobiltelefon im 
 		britischen Vodafone-Netz gesendet. Dies war etwa ein Jahr nach der Einführung 
 		des GSM-Standards für Mobiltelefone in Europa.
+	\item SMS war ursprünglich dazu gedacht über den Signalisierungskanal zum Rufaufbau 
+		Mitteilungen über Netzstörungen oder ähnliche Informationen an die Nutzer zu senden. Der 
+		Dienst wurde daher zunächst kostenlos angeboten, entwickelte sich jedoch zum größten 
+		Ertragsbringer der Netzbetreiber. Der Steuerungsaufwand ist hier verglichen mit einem Telefongespräch
+		sehr gering, was entsprechend höhere Gewinnmargen für die Netzbetreiber bedeutet.
 \end{itemize}
 	
 \subsection{SMS-Spezifikation}
@@ -289,6 +294,21 @@
 \subsubsection{MAP Transport Protocols}
 \begin{itemize}
 	\item TODO for Paper
+\end{itemize}
+
+\subsection{Nachteile von SMS}
+\begin{itemize}
+	\item Multi-Device: Der SMS Service ist an eine einzige Mobilfunknummer gebunden, was in der heutigen Zeit -- 
+		wo Nutzer Laptops, Tablets, Smartphones und PCs nutzen -- einen großen Nachteil gegenüber SMS Alternativen 
+		bildet, welche die Möglichkeit bieten, einen Account auf mehreren Geräten gleichzeitig zu nutzen
+	\item Kosten: SMS sind teuer. Rechenbeispiel: 20 Cents/SMS entspricht bei einer Länge von 140 Bytes/Nachricht Kosten 
+		von 0.14 Cents/Byte. Bei einer Datenflat für \$30/2GB entspricht das 0.000003 Cents/Byte.
+	\item Real-Time: Es gibt keine Garantie für die Zustellzeit. Die Zustellung kann manchmal viel Zeit in Anspruch nehmen. 
+		Es gibt auch keine ``is typing'' Feature, welches aus vielen anderen Messengern bekannt ist. iMessage z.B. bietet 
+		dieses Feature und kommt zudem mit geringeren Zustellzeiten aus.
+	\item Gruppen: Nachrichten an eine Gruppe von Personen sind in SMS nicht möglich.
+	\item Rich Text: Limitation auf 160 7-Bit Zeichen lässt keine besonderen Formatierungen oder Schriftarten zu. Das Einbetten
+		von Grafiken, Emoticons und anderen Multimediainhalten ist nicht möglich. Aber: EMS füllt diese Lücke
 \end{itemize}
 
 \subsection{SMS-Versand in Deutschland, Statistiken}
