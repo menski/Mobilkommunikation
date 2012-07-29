@@ -1,0 +1,115 @@
+\documentclass[german,11pt,a4paper]{article}
+\usepackage{fullpage}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
+\usepackage{subfig}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+\frenchspacing
+
+\newcommand{\comments}[1]{}
+\renewcommand{\baselinestretch}{1.2}
+
+%Redefine the first level
+\renewcommand{\theenumi}{\textbf{\alph{enumi})}}
+\renewcommand{\labelenumi}{\theenumi}
+
+\begin{document}
+
+\title{\textbf{Notes SMS über GSM/GPRS}}
+
+\maketitle
+
+\section{Entstehung}
+\begin{itemize}
+	\item Ursprünglicher Konzeptvorschlag 1984 von Friedhelm Hillebrand von der 
+		damaligen Deutschen Bundespost
+\end{itemize}
+
+\section{SMS-Spezifikationen}
+\begin{itemize}
+	\item andere Encodings: 140 8-bit-Zeichen, 70 16-bit-Zeichen
+	\item SMS können auch für Binärdaten verwendet werden, z.B. Klingeltöne
+	\item Bei Segmentierung: Teil der Payload wird für nutzerspezifischen Header mit 
+		Sequenzinformationen verwendet
+	\item Paralleles Senden/Empfangen während Telefonat möglich; Bandbreite des 
+		Signailiserungskanals wird dann aufgeteilt
+	\item SDCCH: Stand-alone Dedicated Control Channel
+	\item FACCH: Fast Associated Control Channel
+	\item Store-and-forward: SMSC speichert Nachricht und versucht diese periodisch 
+		für eine festgelegte Vorhaltezeit (meist 48h bis 7 Tage) zuzustellen. 
+		SMSC löscht Nachricht nach erfolgreicher Zustellung oder nach Ablauf der 
+		Vorhaltezeit
+\end{itemize}
+
+\section{SMS-Aufbau}
+\begin{itemize}
+	\item Header:
+		\begin{itemize}
+			\item 1 Byte -- Länge der SMSC-Info
+			\item 1 Byte -- Typ der SMSC-Adresse
+			\item n Byte -- SMSC-Adresse
+			\item 1 Byte -- erstes Byte der SMS-DELIVER Message
+			\item 1 Byte -- Länge Sendernummer 
+			\item n Byte -- Sendernummer
+			\item 1 Byte -- Protocol Identifier
+			\item 1 Byte -- Datenkodierunge
+			\item 7 Byte -- Timestamp
+			\item 1 Byte -- Länge Payload
+		\end{itemize}
+	\item Body:
+		\begin{itemize}
+			\item n Byte -- Payload
+		\end{itemize}	
+\end{itemize}
+
+\section{SMS-Versand}
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\section{Grenzen/Nachteile}
+\begin{itemize}
+	\item Multi-Device:
+		\begin{itemize}
+			\item User nutzen Laptops, Tablets, Smartphones und PCs zur Kommunikation
+			\item Möglichkeit der Nutzung eines Accouns auf verschiedenen Systemen ist hier 
+				essentiell
+		\end{itemize}
+	\item Kosten:
+		\begin{itemize}
+			\item Rechenbeispiel SMS: 20 Cent/SMS -- bei 140 Byte/SMS -- 0.14 Cent/Byte
+			\item Rechenbeispiel Daten: \$30/2GB-Flat -- 0.000003 Cent/Byte
+		\end{itemize}
+	\item Real-Time:
+		\begin{itemize}
+			\item Apples iMessage z.B. bietet ``is typing''-Feature und kommt mit 
+				geringeren Zustellzeiten aus
+		\end{itemize}
+	\item Gruppen:
+		\begin{itemize}
+			\item senden an mehrere Personen zwar möglich, jedoch keine Möglichkeit 
+				für Empfänger allen Personen zu antworten, da immer nur der Absender 
+				übermittelt wird 
+		\end{itemize}
+	\item Rich-Text:
+		\begin{itemize}
+			\item Eingebettete Bilder und Videos per MMS zwar möglich, aber teuer
+		\end{itemize}
+	\item Übertragungskanal:
+		\begin{itemize}
+			\item 2006: 20 Mrd. SMS in Dtl., 2011 46Mrd.
+		\end{itemize}
+\end{itemize}
+
+\end{document}
