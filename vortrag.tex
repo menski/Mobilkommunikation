@@ -101,7 +101,7 @@
 	\begin{figure}[htm]
 		\includegraphics[width=0.65\textwidth]{img/mo-forward-sm.png}
 		\label{mo-forward-sm}
-	\end{figure}	
+	\end{figure}
 \end{frame}
 
 \begin{frame}{SMS-Versand -- Mobile Terminated}
@@ -126,7 +126,7 @@
 	\begin{figure}[htm]
 		\includegraphics[width=0.7\textwidth]{img/mt-forward-sm.png}
 		\label{mt-forward-sm}
-	\end{figure}	
+	\end{figure}
 \end{frame}
 
 \subsection{Grenzen von SMS über GSM/GPRS}
@@ -186,7 +186,7 @@
 \begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{Übersicht}
 	\begin{itemize}
 		\item Industriestandard für Kommunikation von mobilen Endgeräten
-		\item Nutz das \textit{IP Multimedia Subsystem (IMS)}
+		\item Nutzt Standards von \textit{3GPP}, \textit{OMA} und \textit{IETF}
 		\item Bestandteile:
 		\begin{itemize}
 			\item Präsenzinformation
@@ -199,9 +199,15 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{Übersicht (2)\cite{rcs:spec}}
+	\begin{figure}[htm]
+		\includegraphics[width=0.65\textwidth]{img/rcs-e-overview}
+	\end{figure}
+\end{frame}
+
 \begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{Entwicklung}
 	\begin{itemize}
-		\item Entwicklungsstaat: 2008
+		\item Entwicklungsstart: 2008
 		\item Druch Branchenverband \textit{GSM Association (GSMA)} vorangetrieben
 		\item Vermarktung unter dem Namen \textit{joyn} (\glqq{}Nachfolger der SMS\grqq{})
 		\item Angekündigte Unterstützung der Betriebssysteme Windows Mobile, iOS und Android
@@ -220,13 +226,51 @@
 \end{itemize}
 \end{frame}
 
+
 \begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{Technik\cite{rcs:spec}}
-\begin{itemize}
-	\item 
-\end{itemize}
+	\begin{itemize}
+		\item \textit{3GPP IP Multimedia Subsystem (IMS)} mit \textit{IETF Session Initiation Protocol (SIP)} zur:
+			\begin{itemize}
+				\item Authentifizierung
+				\item Autorisierung
+				\item Registrierung
+				\item Abrechnung
+			\end{itemize}
+		\item \textit{Open Mobile Alliance (OMA)} Standards zur Kommunikation
+		\item \textit{Standalone Messaging} ist die Weiterentwicklung der SMS/MMS
+	\end{itemize}
 \end{frame}
 
+\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{Standalone Messaging\cite{rcs:spec}}
+	Standalone Messaging:
+	\begin{itemize}
+		\item Text- und Multimedia-Nachrichten
+		\item Versand- und Displaymitteilungen
+		\item Multi-Device Unterstützung
+		\item Zentraler und lokaler Nachrichtenspeicher
+		\item Unterstützung alten Nachrichtensysteme (SMS, MMS)
+		\item nutzt \textit{OMA Converged IP Messaging (CPM)} im Pager und Large Message Mode
+		\item Pager Mode: Begrenzung auf 1300 Byte
+	\end{itemize}
+\end{frame}
 
+\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{CPM Pager Mode\cite{rcs:spec}}
+	\begin{figure}[htm]
+		\includegraphics[width=0.85\textwidth]{img/rcs-e-pager}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{CPM Large Mode\cite{rcs:spec}}
+	\begin{figure}[htm]
+		\includegraphics[width=0.85\textwidth]{img/rcs-e-large}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{SMS Unterstützung\cite{rcs:spec}}
+	\begin{figure}[htm]
+		\includegraphics[width=0.75\textwidth]{img/rcs-e-sms}
+	\end{figure}
+\end{frame}
 
 \subsection{Vergleich}
 \begin{frame}{Vergleich}
@@ -237,12 +281,17 @@
 			Beispiele & iMessages, Blackberry Messenger & WhatsApp, kik & joyn \\
 			Vorteile & + saubere Integeration ins OS & + plattformübergreifend & + plattformübergreifend \\
 								& + keine Anmeldung nötig & + kostenlos bzw. geringe Kosten & + keine Anmeldung nötig  \\
-								& + kostenlos	&  & + implementiert durch Netzbetreiber	\\
-								& & & + offener Standard \\
+								& + kostenlos	&  + jeder Nutzer hat die & + offener Standard\\
+								& + jeder Nutzer hat die & $~~~$gleichen Funktionen &   + implementiert durch Netzbetreiber \\
+								& $~~~$gleichen Funktionen & & 	+ Alle Services bei einem Dienst \\
+								& & & $~~~$(Sprach-/Videotelefonie, IM,\\
+							 & & & $~~~$ Dateiaustausch, Ortung) \\
 							 & & & \\
 			Nachteile & - auf Hersteller begrenzt & - Anmeldung bei Drittanbieter nötig & - Preispolitk der	Netzbetreiber \\
 										 & - proprietär & - proprietär & - unklare Einführungsphase \\
-								& & & - unklare Adaption  \\
+								& - nur Messaging & - nur Messaging & - unklare Adaption  \\
+								& & & - verfügbare Funktionen sind\\
+								& & & $~~~$vom Netzbetreiber abhängig \\
 		\end{tabular}
 	}
 	}
