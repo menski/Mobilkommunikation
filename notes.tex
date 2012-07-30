@@ -12,6 +12,8 @@
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
 \usepackage{subfig}
+\usepackage[colorlinks=false,pdfborder={0 0 0}]{hyperref}
+
 
 \pagestyle{plain}
 \pagenumbering{arabic}
@@ -32,7 +34,8 @@
 
 \maketitle
 
-\section{SMS traditionell}
+\section{SMS traditionell} % {{{
+\laben[sec:sms}
 \subsection{Geschichte}
 \begin{itemize}
 	\item Erste Überlegungen zu Textnachrichtendienst 1984 bei den europäischen 
@@ -331,5 +334,74 @@
 	\item Kodierung des Nachrichtenbodies basiert auf MIME
 	\item MMS im Vergleich zu SMS viel stärker an E-Mail angelehnt
 \end{itemize}
+
+% section sms }}}
+
+\section{Rich Communication Suite} % {{{
+\label{sec:rcs}
+
+\subsection{Übersicht} % {{{
+\label{sub:uebersicht}
+
+Quelle: \url{http://en.wikipedia.org/wiki/Rich\_Communication\_Suite}
+\begin{itemize}
+	\item Industriestandard zur Nutzung des \textit{IP Multimedia Subsystem (IMS)} für Kommunikation von mobilen
+		Endgeräten
+	\item Für den Enduser: Sprachkommunikation, Instant Messaging, Videotelefonie,
+		Kontakliste
+	\item Main features: Enhanced Phonebook, Enhanced Messaging, Enriched Call
+	\item Es werden verschiedene Standards genutzt, z.B. von \textit{3GPP} und  \textit{Open Mobile
+		Alliance (OMA)} definiert, um das Enhanced Phonebook zu realisieren 
+	\item RCS nutzt \textit{IMS} als Service-Platform zur Authentifizierungen, Autorisierung,
+		Registration, Abrechnung und Routing
+	\item Bestandteile des RCS-Konzepts:
+		\begin{itemize}
+			\item Präsenzinformation
+				(\url{http://de.wikipedia.org/wiki/Pr%C3%A4senzinformation})
+			\item Sprachtelefonie
+			\item Instant Messaging
+			\item Videoübertragung
+			\item Bildübertragung
+			\item SMS
+			\item MMS
+			\item Ortung
+		\end{itemize}
+\end{itemize}
+
+% subsection uebersicht} }}}
+
+\subsection{Entwicklung} % {{{
+\label{sub:entwicklung}
+
+Quelle: \url{http://de.wikipedia.org/wiki/Joyn}
+\begin{itemize}
+	\item Begann 2008 auf Initiative Nokias
+	\item Wird vom Branchenverband \textit{GSM Association (GSMA)} vorrangetrieben
+	\item Wird als \textit{Joyn} vermarktet und als "Nachfolger der SMS"
+	\item Unterstützung von den Betriebssystemen Windows Mobile, iOS und Android
+	\item Anfangs Einbindung durch Apps später im Betriebssystem verankert
+	\item Offizielle Premiere auf der \textit{GSMA Mobile World Congress 2012 (MWC)}
+\end{itemize}
+
+% subsection entwicklung }}}
+
+\subsection{Einführung} % {{{
+\label{sub:einfuehrung
+
+\begin{itemize}
+	\item Vodafone Spanien startet Anfang 2012 eine \textit{Joyn} beta und bietet dazu eine Android App an
+		(bis zum 13.01.2013 kostenlose Nutzung)
+	\item In Deutschland:
+		\begin{itemize}
+			\item Vodafone Juni 2012 \url{http://www.vodafone.de/unternehmen/presse/pm-archiv-2012i_199573.html}
+			\item T-Mobile Oktober 2012
+			\item O2 2013
+		\end{itemize}
+\end{itemize}
+
+% subsection einfuehrung }}}
+	
+
+% section rcs }}}
 
 \end{document}
