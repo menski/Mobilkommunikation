@@ -68,65 +68,75 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}{SMS-Architektur}
-	\begin{figure}[htm]
-		\includegraphics[width=0.7\textwidth]{img/sms-arch.png}
-		\label{sms-arch}
-	\end{figure}
+\begin{frame}{SMS-Versand}
+	\begin{itemize}
+		\item Realisiert durch den Mobile Application Part (MAP) des SS\#7 
+			(Signaling System No. 7) Protokolls 
+		\item Elemente des Short Message Protokolls werden als Felder innerhalb 
+			von MAP Nachrichten durch das Netzwerk transportiert
+		\item Vier MAP Prozeduren zur Kontrolle des Short Message Services:
+			\begin{itemize}
+				\item Mobile Originated (MO) short message service transfer
+				\item Mobile Terminated (MT) short message service transfer
+				\item Short message alert procedure
+				\item Short message waiting data set procedure
+			\end{itemize}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{SMS-Versand -- Mobile Originated}
 
-	\begin{tabular}{l l}
-		\begin{minipage}{0.6\textwidth}
-			\begin{itemize}
-				\item Nachricht wird vom mobilen Endgerät über Funk zum Mobile Switching 
-					Center/GRPS Core Network(VMSC/SGSN) geschickt
-				\item VMSC/SGSN sendet mo-ForwardSM Operation an das zuständige SMSC 
-					des Providers (Übermittlung von SMS-PP APDU)
-				\item SMSC speichert Nachricht und versucht anschließend diese an die 
-					Zieladresse auszuliefern
-			\end{itemize}
-		\end{minipage}
-		&
-		\begin{minipage}{0.4\textwidth}
-			\begin{figure}[htm]
-				\includegraphics[width=\textwidth]{img/mo-forward-sm.png}
-				\label{mo-forward-sm}
-			\end{figure}	
-		\end{minipage}
-	\end{tabular}	
+	\begin{itemize}
+		\item Nachricht wird vom mobilen Endgerät über Funk zum Mobile Switching 
+			Center/GRPS Core Network(VMSC/SGSN) geschickt
+		\item VMSC/SGSN sendet mo-ForwardSM Operation an das zuständige SMSC 
+			des Providers (Übermittlung von SMS-PP Application Protocol Data Unit (APDU))
+		\item SMSC speichert Nachricht und versucht anschließend diese an die 
+			Zieladresse auszuliefern
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{SMS-Versand -- Mobile Originated (2)}
+
+	\begin{figure}[htm]
+		\includegraphics[width=0.65\textwidth]{img/mo-forward-sm.png}
+		\label{mo-forward-sm}
+	\end{figure}	
 \end{frame}
 
 \begin{frame}{SMS-Versand -- Mobile Terminated}
 
-	\begin{tabular}{l l}
-		\begin{minipage}{0.5\textwidth}
-			\begin{itemize}
-				\item SMSC sendet SMS-PP APDU der Nachricht an die Gateway MSC (GMSC) 
-					Komponente des SMSC
-				\item GMSC fragt beim Home Location Register (HLR) Position des 
-					Empfängers an (SRI-for-SM)
-			\end{itemize}
-		\end{minipage}
-		&
-		\begin{minipage}{0.5\textwidth}
-			\begin{figure}[htm]
-				\includegraphics[width=\textwidth]{img/mt-forward-sm.png}
-				\label{mt-forward-sm}
-			\end{figure}	
-		\end{minipage}
-	\end{tabular}	
+	\begin{itemize}
+		\item SMSC sendet SMS-PP APDU der Nachricht an die Gateway MSC (GMSC) 
+			Komponente des SMSC
+		\item GMSC fragt beim Home Location Register (HLR) Position des 
+			Empfängers an (SRI-for-SM)
+		\item GMSC sendet mt-ForwardSM Nachricht an die vom HLR bereitgestellte 
+			Adresse des VMSC/SGSN
+		\item Das VMSC/SGSN fragt die benötigten Informationen zum Ausliefern der Nachricht beim VLR 
+			durch eine Send\_Info\_for\_MS\_SMS Nachricht ab. 
+		\item Das VLR sucht nach dem 
+			Empfänger und liefert die Mobile Subscriber ISDN Number (MSISDN) des Empfängers an 
+			das VMSC zurück
+	\end{itemize}
 \end{frame}
 
-\subsection{Nachteile}
-\begin{frame}{Nachteile von SMS über GSM/GPRS}
+\begin{frame}{SMS-Versand -- Mobile Terminated (2)}
+
+	\begin{figure}[htm]
+		\includegraphics[width=0.7\textwidth]{img/mt-forward-sm.png}
+		\label{mt-forward-sm}
+	\end{figure}	
+\end{frame}
+
+\subsection{Grenzen von SMS über GSM/GPRS}
+\begin{frame}{Grenzen von SMS über GSM/GPRS}
 	\begin{itemize}
 		\item \textbf{Nicht Multi-Device tauglich}: SMS Service ist an eine einzige 
 			Mobilfunknummer gebunden
 		\item Kosten: SMS im Vergleich zu Kommunikation über Datennetz sehr 
 			\textbf{teuer}
-		\item \textbf{Keine Real-Time-Kommunikation} möglich; lange Zustellzeiten; 
+		\item \textbf{Keine Real-Time-Kommunikation} möglich; keine garantierten Zustellzeiten; 
 			kein ``is typing''-Feature
 		\item \textbf{Keine Gruppennachrichten} möglich
 		\item Durch Limitation auf 160 7-Bit-Zeichen \textbf{keine Rich-Text-Nachrichten} 
@@ -158,24 +168,11 @@
 	\end{itemize}
 \end{frame}
 
-\section{Ausblick}
-\begin{frame}{Ausblick}
-	\begin{itemize}
-		\item Item 1
-		\begin{itemize}
-			\item Subitem 1
-		\end{itemize}
-		\item Item 2
-		\item Item 3
-	\end{itemize}
-\end{frame}
-
-
 \section{}
 
 \begin{frame}{Quellen}	
-	\scriptsize{
-		\nocite{author1:title1,author1:title2}
+	\tiny{
+		\nocite{thesms,tutgsm,wikipedia:smsgsm}
 		\bibliography{cites}
 	}
 \end{frame}
