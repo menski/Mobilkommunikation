@@ -102,48 +102,92 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{SMS-Versand -- Mobile Originated}
+\begin{frame}{SMS-Versand -- Mobile Originated (1)}
 
 	\begin{itemize}
 		\item Nachricht wird vom mobilen Endgerät über Funk zum Mobile Switching 
 			Center/GRPS Core Network (VMSC/SGSN) geschickt
-		\item VMSC/SGSN sendet mo-ForwardSM Operation an das zuständige SMSC 
-			des Providers (Übermittlung von SMS-PP Application Protocol Data Unit (APDU))
-		\item SMSC speichert Nachricht und versucht anschließend diese an die 
-			Zieladresse auszuliefern
 	\end{itemize}
+	\begin{figure}[htm]
+		\includegraphics[width=0.55\textwidth]{img/mo-forward-sm-1.png}
+	\end{figure}	
 \end{frame}
 
 \begin{frame}{SMS-Versand -- Mobile Originated (2)}
 
+	\begin{itemize}
+		\item VMSC/SGSN sendet mo-ForwardSM Operation an das zuständige SMSC 
+			des Providers (Übermittlung von SMS-PP Application Protocol Data Unit (APDU))
+	\end{itemize}
 	\begin{figure}[htm]
-		\includegraphics[width=0.65\textwidth]{img/mo-forward-sm.png}
-		\label{mo-forward-sm}
-	\end{figure}
+		\includegraphics[width=0.55\textwidth]{img/mo-forward-sm-2.png}
+	\end{figure}	
 \end{frame}
 
-\begin{frame}{SMS-Versand -- Mobile Terminated}
+\begin{frame}{SMS-Versand -- Mobile Originated (3)}
+
+	\begin{itemize}
+		\item SMSC speichert Nachricht und versucht anschließend diese an die 
+			Zieladresse auszuliefern
+	\end{itemize}
+	\begin{figure}[htm]
+		\includegraphics[width=0.55\textwidth]{img/mo-forward-sm-3.png}
+	\end{figure}	
+\end{frame}
+
+\begin{frame}{SMS-Versand -- Mobile Terminated (1)}
 
 	\begin{itemize}
 		\item SMSC sendet SMS-PP APDU der Nachricht an die Gateway MSC (GMSC) 
 			Komponente des SMSC
-		\item GMSC fragt beim Home Location Register (HLR) Position des 
-			Empfängers an (SRI-for-SM)
-		\item GMSC sendet mt-ForwardSM Nachricht an die vom HLR bereitgestellte 
-			Adresse des VMSC/SGSN
-		\item Das VMSC/SGSN fragt die benötigten Informationen zum Ausliefern der Nachricht beim VLR 
-			durch eine Send\_Info\_for\_MS\_SMS Nachricht ab
-		\item Das VLR sucht nach dem 
-			Empfänger und liefert die Mobile Subscriber ISDN Number (MSISDN) des Empfängers an 
-			das VMSC zurück
 	\end{itemize}
+	\begin{figure}[htm]
+		\includegraphics[width=0.7\textwidth]{img/mt-forward-sm-1.png}
+	\end{figure}
 \end{frame}
 
 \begin{frame}{SMS-Versand -- Mobile Terminated (2)}
 
+	\begin{itemize}
+		\item GMSC fragt beim Home Location Register (HLR) Position des 
+			Empfängers an (SRI-for-SM)
+	\end{itemize}
 	\begin{figure}[htm]
-		\includegraphics[width=0.7\textwidth]{img/mt-forward-sm.png}
-		\label{mt-forward-sm}
+		\includegraphics[width=0.7\textwidth]{img/mt-forward-sm-2.png}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{SMS-Versand -- Mobile Terminated (3)}
+
+	\begin{itemize}
+		\item GMSC sendet mt-ForwardSM Nachricht an die vom HLR bereitgestellte 
+			Adresse des VMSC/SGSN
+	\end{itemize}
+	\begin{figure}[htm]
+		\includegraphics[width=0.7\textwidth]{img/mt-forward-sm-3.png}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{SMS-Versand -- Mobile Terminated (4)}
+
+	\begin{itemize}
+		\item Das VMSC/SGSN fragt die benötigten Informationen zum Ausliefern der Nachricht beim VLR 
+			durch eine Send\_Info\_for\_MS\_SMS Nachricht ab
+	\end{itemize}
+	\begin{figure}[htm]
+		\includegraphics[width=0.7\textwidth]{img/mt-forward-sm-4.png}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{SMS-Versand -- Mobile Terminated (5)}
+
+	\begin{itemize}
+		\item Das VLR sucht nach dem 
+			Empfänger und liefert die Mobile Subscriber ISDN Number (MSISDN) des Empfängers an 
+			das VMSC zurück
+	\end{itemize}
+	\begin{figure}[htm]
+		\includegraphics[width=0.7\textwidth]{img/mt-forward-sm-5.png}
 	\end{figure}
 \end{frame}
 
