@@ -7,7 +7,7 @@
 \newcommand{\comments}[1]{}
 \bibliographystyle{plain}
 
-\setlength{\leftmargini}{10pt}
+%\setlength{\leftmargini}{10pt}
 
 \usetheme{Madrid}
 \usecolortheme{default}
@@ -94,10 +94,10 @@
 			von MAP Nachrichten durch das Netzwerk transportiert
 		\item Vier MAP Prozeduren zur Kontrolle des Short Message Services:
 			\begin{itemize}
-				\item Mobile Originated (MO) short message service transfer
-				\item Mobile Terminated (MT) short message service transfer
-				\item Short message alert procedure
-				\item Short message waiting data set procedure
+				\item Mobile Originated (MO) Short Message Service Transfer
+				\item Mobile Terminated (MT) Short Message Service Transfer
+				\item Short Message Alert Procedure
+				\item Short Message Waiting Data Set Procedure
 			\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -106,7 +106,7 @@
 
 	\begin{itemize}
 		\item Nachricht wird vom mobilen Endgerät über Funk zum Mobile Switching 
-			Center/GRPS Core Network (VMSC/SGSN) geschickt
+			Center/Serving GPRS Support Node (VMSC/SGSN) geschickt
 	\end{itemize}
 	\begin{figure}[htm]
 		\includegraphics[width=0.55\textwidth]{img/mo-forward-sm-1.png}
@@ -116,8 +116,8 @@
 \begin{frame}{SMS-Versand -- Mobile Originated (2)}
 
 	\begin{itemize}
-		\item VMSC/SGSN sendet mo-ForwardSM Operation an das zuständige SMSC 
-			des Providers (Übermittlung von SMS-PP Application Protocol Data Unit (APDU))
+		\item VMSC/SGSN sendet Nachricht mittels mo-ForwardSM Operation an das Interworking MSC (IW MSC)
+			des zuständigen SMSCs des Providers
 	\end{itemize}
 	\begin{figure}[htm]
 		\includegraphics[width=0.55\textwidth]{img/mo-forward-sm-2.png}
@@ -127,8 +127,8 @@
 \begin{frame}{SMS-Versand -- Mobile Originated (3)}
 
 	\begin{itemize}
-		\item SMSC speichert Nachricht und versucht anschließend diese an die 
-			Zieladresse auszuliefern
+		\item IW MSC leitet die SMS-PP Application Protocol Data Unit (APDU) an das Service Center weiter, welches 
+			diese speichert
 	\end{itemize}
 	\begin{figure}[htm]
 		\includegraphics[width=0.55\textwidth]{img/mo-forward-sm-3.png}
@@ -150,7 +150,7 @@
 
 	\begin{itemize}
 		\item GMSC fragt beim Home Location Register (HLR) Position des 
-			Empfängers an (SRI-for-SM)
+			Empfängers mittels sendRoutingInfoForSM (SRI-for-SM) MAP Nachricht ab 
 	\end{itemize}
 	\begin{figure}[htm]
 		\includegraphics[width=0.7\textwidth]{img/mt-forward-sm-2.png}
@@ -171,7 +171,7 @@
 \begin{frame}{SMS-Versand -- Mobile Terminated (4)}
 
 	\begin{itemize}
-		\item Das VMSC/SGSN fragt die benötigten Informationen zum Ausliefern der Nachricht beim VLR 
+		\item Das VMSC fragt die benötigten Informationen zum Ausliefern der Nachricht beim VLR 
 			durch eine Send\_Info\_for\_MS\_SMS Nachricht ab
 	\end{itemize}
 	\begin{figure}[htm]
@@ -188,6 +188,16 @@
 	\end{itemize}
 	\begin{figure}[htm]
 		\includegraphics[width=0.7\textwidth]{img/mt-forward-sm-5.png}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{SMS-Versand -- Mobile Terminated (6)}
+
+	\begin{itemize}
+		\item Das VMSC/SGSN sendet die Nachricht über Funk an das mobile Endgerät
+	\end{itemize}
+	\begin{figure}[htm]
+		\includegraphics[width=0.7\textwidth]{img/mt-forward-sm-6.png}
 	\end{figure}
 \end{frame}
 
@@ -342,7 +352,7 @@
 	\makebox[\textwidth]{
 	\tiny{
 		\begin{tabular}{c|lll}
-			& Hersteller-Service & Apps & RCS-e \\\hline
+			& \textbf{Hersteller-Service} & \textbf{Apps} & \textbf{RCS-e} \\\hline
 			Beispiele & iMessages, Blackberry Messenger & WhatsApp, kik & joyn \\
 			Vorteile & + saubere Integeration ins OS & + plattformübergreifend & + plattformübergreifend \\
 								& + keine Anmeldung nötig & + kostenlos bzw. geringe Kosten & + keine Anmeldung nötig  \\
