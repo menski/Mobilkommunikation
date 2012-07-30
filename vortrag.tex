@@ -269,7 +269,7 @@
 			\item Videoübertragung
 			\item Datenaustausch
 			\item Instant Messaging
-			\item Ortung
+			\item Geolocation
 		\end{itemize}
 	\end{itemize}
 	 \end{minipage}
@@ -283,7 +283,7 @@
 \begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{Entwicklung}
 	\begin{itemize}
 		\item Entwicklungsstart: 2008
-		\item Druch Branchenverband \textbf{GSM Association (GSMA)} vorangetrieben
+		\item Durch Branchenverband \textbf{GSM Association (GSMA)} vorangetrieben
 		\item Vermarktung unter dem Namen \textbf{joyn} (\glqq{}Nachfolger der SMS\grqq{})
 		\item Angekündigte Unterstützung der Betriebssysteme Windows Mobile, iOS und Android
 		\item Anfangs durch Apps; Später integration ins OS
@@ -317,31 +317,30 @@
 \end{frame}
 
 \begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{Standalone Messaging\cite{rcs:spec}}
-	Standalone Messaging:
 	\begin{itemize}
 		\item Text- und Multimedia-Nachrichten
 		\item Versand- und Displaymitteilungen
 		\item Multi-Device Unterstützung
 		\item Zentraler und lokaler Nachrichtenspeicher
-		\item Unterstützung alten Nachrichtensysteme (SMS, MMS)
+		\item Unterstützung alter Nachrichtensysteme (SMS, MMS)
 		\item nutzt \textbf{OMA Converged IP Messaging (CPM)} im Pager und Large Message Mode
-		\item Pager Mode: Begrenzung auf 1300 Byte
+		\item \textbf{Pager Mode}: Begrenzung auf 1300 Bytes
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{CPM Pager Mode\cite{rcs:spec}}
+\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{CPM Pager Mode\cite{rcs:spec,rcs:cpm,oma:cpm}}
 	\begin{figure}[htm]
 		\includegraphics[width=0.85\textwidth]{img/rcs-e-pager}
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{CPM Large Mode\cite{rcs:spec}}
+\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{CPM Large Mode\cite{rcs:spec,rcs:cpm,oma:cpm}}
 	\begin{figure}[htm]
 		\includegraphics[width=0.85\textwidth]{img/rcs-e-large}
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{SMS Unterstützung\cite{rcs:spec}}
+\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{SMS Unterstützung\cite{rcs:spec,rcs:cpm,oma:cpm}}
 	\begin{figure}[htm]
 		\includegraphics[width=0.75\textwidth]{img/rcs-e-sms}
 	\end{figure}
@@ -353,20 +352,21 @@
 	\tiny{
 		\begin{tabular}{c|lll}
 			& \textbf{Hersteller-Service} & \textbf{Apps} & \textbf{RCS-e} \\\hline
-			Beispiele & iMessages, Blackberry Messenger & WhatsApp, kik & joyn \\
-			Vorteile & + saubere Integeration ins OS & + plattformübergreifend & + plattformübergreifend \\
+			\textbf{Beispiele} & iMessages, Blackberry Messenger & WhatsApp, kik & joyn \\
+							 & & & \\
+			\textbf{Vorteile} & + saubere Integeration ins OS & + plattformübergreifend & + plattformübergreifend \\
 								& + keine Anmeldung nötig & + kostenlos bzw. geringe Kosten & + keine Anmeldung nötig  \\
 								& + kostenlos	&  + jeder Nutzer hat die & + offener Standard\\
 								& + jeder Nutzer hat die & $~~~$gleichen Funktionen &   + implementiert durch Netzbetreiber \\
 								& $~~~$gleichen Funktionen & & 	+ Alle Services bei einem Dienst \\
 								& & & $~~~$(Sprach-/Videotelefonie, IM,\\
-							 & & & $~~~$ Dateiaustausch, Ortung) \\
+							 & & & $~~~$Dateiaustausch, Geolocation) \\
 							 & & & \\
-			Nachteile & - auf Hersteller begrenzt & - Anmeldung bei Drittanbieter nötig & - Preispolitk der	Netzbetreiber \\
+			\textbf{Nachteile} & - auf Hersteller begrenzt & - Anmeldung bei Drittanbieter nötig & - Preispolitk der	Netzbetreiber \\
 										 & - proprietär & - proprietär & - unklare Einführungsphase \\
 								& - nur Messaging & - nur Messaging & - unklare Adaption  \\
 								& & & - verfügbare Funktionen sind\\
-								& & & $~~~$vom Netzbetreiber abhängig \\
+								& & & $~~$vom Netzbetreiber abhängig \\
 		\end{tabular}
 	}
 	}
