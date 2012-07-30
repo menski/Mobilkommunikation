@@ -9,10 +9,28 @@
 
 \setlength{\leftmargini}{10pt}
 
-\usetheme{Berlin}
+\usetheme{Madrid}
 \usecolortheme{default}
 \setbeamertemplate{navigation symbols}{}
 
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor%~~\beamer@ifempty{\insertshortinstitute}{}{(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
 
 \title[SMS Versendung über Datenkanäle]{SMS Versendung über Datenkanäle}
 \author{Sebastian Menski \and Martin Ohmann}
@@ -166,7 +184,6 @@
 		\item Beispiele: iMessages (Apple), Blackberry Messenger
 		\item Kunden können \textbf{untereinander} kostenlos über Nachrichten kommunizieren
 		\item Keine Anmeldung nötig
-		\item Ähnlich Instant Messaging
 	\end{itemize}
 \end{frame}
 
@@ -178,15 +195,19 @@
 		\item Beispiele: WhatsApp, kik
 		\item Kunden müssen sich anmelden oder werden über die Mobilfunknummer identifiziert
 		\item Kostenlos oder geringe Kosten
-		\item Ähnlich Instant Messaging
 	\end{itemize}
 \end{frame}
 
 \subsection{RCS-e}
-\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{Übersicht}
+\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{Übersicht\cite{rcs:spec}}
 	\begin{itemize}
 		\item Industriestandard für Kommunikation von mobilen Endgeräten
 		\item Nutzt Standards von \textit{3GPP}, \textit{OMA} und \textit{IETF}
+	\end{itemize}
+	\hspace{-0.28cm}
+	\begin{tabular}{ll}
+	 \begin{minipage}{0.4\textwidth}
+	\begin{itemize}
 		\item Bestandteile:
 		\begin{itemize}
 			\item Präsenzinformation
@@ -197,12 +218,12 @@
 			\item Ortung
 		\end{itemize}
 	\end{itemize}
-\end{frame}
-
-\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{Übersicht (2)\cite{rcs:spec}}
-	\begin{figure}[htm]
-		\includegraphics[width=0.65\textwidth]{img/rcs-e-overview}
-	\end{figure}
+	 \end{minipage}
+	 &
+	 \begin{minipage}{0.6\textwidth}
+		\includegraphics[width=0.9\textwidth]{img/rcs-e-overview}
+	 \end{minipage}
+	\end{tabular}
 \end{frame}
 
 \begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{Entwicklung}
