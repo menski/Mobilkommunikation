@@ -29,7 +29,7 @@
 \tableofcontents
 \end{frame}
 
-\section{SMS über GSM/GPRS}
+\section{SMS über GSM/GPRS} %{{{
 
 \subsection{Entstehung}
 \begin{frame}{Entstehung}
@@ -146,6 +146,8 @@
 	\end{itemize}
 \end{frame}
 
+% sms }}}
+
 \section{SMS über Datennetze}
 \begin{frame}{Datennetzbasierte SMS Alternativen}
 	\begin{itemize}
@@ -157,19 +159,101 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}{RCS-e}
+\subsection{Hersteller-Service}
+\begin{frame}{Hersteller-Service}
 	\begin{itemize}
-		\item Item 1
-		\begin{itemize}
-			\item Subitem 1
-		\end{itemize}
-		\item Item 2
-		\item Item 3
+		\item Hersteller spezifischer Service
+		\item Beispiele: iMessages (Apple), Blackberry Messenger
+		\item Kunden können \textbf{untereinander} kostenlos über Nachrichten kommunizieren
+		\item Keine Anmeldung nötig
+		\item Ähnlich Instant Messaging
 	\end{itemize}
 \end{frame}
 
-\section{}
+\subsection{Apps}
+\begin{frame}{Apps}
+	\begin{itemize}
+		\item Apps für Smartphones von Drittanbietern
+		\item Meißt für alle wichtigen Platformen verfügbar
+		\item Beispiele: WhatsApp, kik
+		\item Kunden müssen sich anmelden oder werden über die Mobilfunknummer identifiziert
+		\item Kostenlos oder geringe Kosten
+		\item Ähnlich Instant Messaging
+	\end{itemize}
+\end{frame}
 
+\subsection{RCS-e}
+\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{Übersicht}
+	\begin{itemize}
+		\item Industriestandard für Kommunikation von mobilen Endgeräten
+		\item Nutz das \textit{IP Multimedia Subsystem (IMS)}
+		\item Bestandteile:
+		\begin{itemize}
+			\item Präsenzinformation
+			\item Sprachtelefonie
+			\item Videoübertragung
+			\item Datenaustausch
+			\item Instant Messaging
+			\item Ortung
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{Entwicklung}
+	\begin{itemize}
+		\item Entwicklungsstaat: 2008
+		\item Druch Branchenverband \textit{GSM Association (GSMA)} vorangetrieben
+		\item Vermarktung unter dem Namen \textit{joyn} (\glqq{}Nachfolger der SMS\grqq{})
+		\item Angekündigte Unterstützung der Betriebssysteme Windows Mobile, iOS und Android
+		\item Anfangs durch Apps; Später integration ins OS
+		\item Offizielle Premiere auf der \textit{GSMA Mobile World Congress 2012 (MWC)}
+		\item Gleichzeitig Freigabe der Version 5.0 des Standards
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{Einführung}
+\begin{itemize}
+	\item Vodafone Spanien startete Anfang 2012 eine Beta-Phase mit Android-App
+	\item Vodafone Deutschland: \glqq{}angeblich\grqq{} im Juni 2012
+	\item T-Mobile: Oktober 2012
+	\item O2: 2013
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Rich Communication Suite-enhanced (RCS-e)}{Technik\cite{rcs:spec}}
+\begin{itemize}
+	\item 
+\end{itemize}
+\end{frame}
+
+
+
+\subsection{Vergleich}
+\begin{frame}{Vergleich}
+	\makebox[\textwidth]{
+	\tiny{
+		\begin{tabular}{c|lll}
+			& Hersteller-Service & Apps & RCS-e \\\hline
+			Beispiele & iMessages, Blackberry Messenger & WhatsApp, kik & joyn \\
+			Vorteile & + saubere Integeration ins OS & + plattformübergreifend & + plattformübergreifend \\
+								& + keine Anmeldung nötig & + kostenlos bzw. geringe Kosten & + keine Anmeldung nötig  \\
+								& + kostenlos	&  & + implementiert durch Netzbetreiber	\\
+								& & & + offener Standard \\
+							 & & & \\
+			Nachteile & - auf Hersteller begrenzt & - Anmeldung bei Drittanbieter nötig & - Preispolitk der	Netzbetreiber \\
+										 & - proprietär & - proprietär & - unklare Einführungsphase \\
+								& & & - unklare Adaption  \\
+		\end{tabular}
+	}
+	}
+\end{frame}
+
+\section{Fazit}
+\begin{frame}{Fazit}
+
+\end{frame}
+
+\section{}
 \begin{frame}{Quellen}	
 	\tiny{
 		\nocite{thesms,tutgsm,wikipedia:smsgsm}
