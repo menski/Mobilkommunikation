@@ -89,54 +89,45 @@ maximale Nachrichtenlänge 140 bzw. 70 Zeichen. Das System ist in der Lage über
 Nachrichten zu segmentieren. So werden bei Nachrichten, die länger als 160 Zeichen 
 sind, mehrere SMS gesendet und später beim Empfänger wieder zusammengesetzt.
 
-\begin{figure}[h!]
-    \centering
-    \begin{tabular}{ p{4cm} | p{10cm} }
-        Oktett(s) & Beschreibung \\
-        \hline \hline
-         07 & Länge der SMSC-Informationen (hier 7 Oktetts) \\ 
-         \hline
-         91 & Typ der SMSC-Adresse (91 bedeutet internationales Telefonnummernformat) \\ 
-         \hline
-         72 83 01 00 10 F5 & SMSC-Nummer (hier +27381000015) \\ 
-         \hline
-         04 & Erstes Oktett dieser SMS-DELIVER message \\ 
-         \hline
-         0B & Länge der Adresse/Nummer des Senders (0B$_{16}$ = 11$_{10}$) \\ 
-         \hline
-         C8 & Typ der Sender-Adresse \\ 
-         \hline
-         72 38 88 09 00 F1 & Sender-Nummer (hier +27838890001) \\ 
-         \hline
-         00 & Protocol identifier (00 = SME-to-SME Protokoll -- implizit) \\ 
-         \hline
-         00 & Datenkodierung (00 = 7 bit, 01 = 8 bit, 10 = 16 bit, 11 = reserviert) \\ 
-         \hline
-         99 30 92 51 61 95 80 & Zeitstempel \\ 
-         \hline
-         0A & Nutzdatenlänge/Länge der Nachricht \\ 
-         \hline
-         E8 32 9B FD 46 97 D9 EC 37 & Nachricht "hellohello", 8-bit Oktetts representiert als 7-bit Daten
-    \end{tabular}
-    \label{tbl:sms-struct}
-
-    \caption{Beispiel der Transfer Protocol Data Unit: \\
-        \texttt{07 91 72 83 01 00 10 F5 04 0B C8 72 38 88 09 00 F1 00 00 99 30 92 51 61 95 80 0A E8 32 9B FD 46 97 D9 EC 37}
-    }
-\end{figure}
-
-
 SMS können auch dazu benutzt werden Binärdaten zu senden, wie zum Beispiel 
 Klingeltöne oder Bildnachrichten. Spezielle Anwendungen auf 
 dem Telefon übernehmen die Verarbeitung dieser.
 
-\subsection{Übertragung}
-SMS nutzt einen Signalisierungskanel des GSM-Standards wie etwa SDCCH (Stand-alone Dedicated Control Channel) 
-oder FACCH (Fast Associated Control Channel). Diese Kanäle werden auch genutzt, um Gespräche aufzubauen und zu 
-halten.
-
-Kurzmitteilungen können parallel zu Telefongesprächen empfangen/gesendet werden. Teil der Bandbreite des 
-Verkehrsdatenkanals wird hier temporär zum Signailiserungskanal (SACCH) umkonfiguriert.
+\begin{figure}[h!]
+    \centering
+    \begin{tabular}{ p{4cm} | p{10cm} }
+        \textbf{Oktett(s)} & \textbf{Beschreibung} \\
+        \hline \hline
+         \texttt{07} & Länge der SMSC-Informationen (hier 7 Oktetts) \\ 
+         \hline
+         \texttt{91} & Typ der SMSC-Adresse (91 bedeutet internationales Telefonnummernformat) \\ 
+         \hline
+         \texttt{72 83 01 00 10 F5} & SMSC-Nummer (hier +27381000015) \\ 
+         \hline
+         \texttt{04} & Erstes Oktett dieser SMS-DELIVER message \\ 
+         \hline
+         \texttt{0B} & Länge der Adresse/Nummer des Senders (0B$_{16}$ = 11$_{10}$) \\ 
+         \hline
+         \texttt{C8} & Typ der Sender-Adresse \\ 
+         \hline
+         \texttt{72 38 88 09 00 F1} & Sender-Nummer (hier +27838890001) \\ 
+         \hline
+         \texttt{00} & Protocol identifier (00 = SME-to-SME Protokoll -- implizit) \\ 
+         \hline
+         \texttt{00} & Datenkodierung (00 = 7 bit, 01 = 8 bit, 10 = 16 bit, 11 = reserviert) \\ 
+         \hline
+         \texttt{99 30 92 51 61 95 80} & Zeitstempel \\ 
+         \hline
+         \texttt{0A} & Nutzdatenlänge/Länge der Nachricht \\ 
+         \hline
+         \texttt{E8 32 9B FD 46 97 D9 EC 37} & Nachricht "hellohello", 8-bit Oktetts representiert als 7-bit Daten
+    \end{tabular}
+    \label{tbl:sms-struct}
+    \centering
+    \caption{Beispiel der Transfer Protocol Data Unit: 
+        \texttt{07 91 72 83 01 00 10 F5 04 0B C8 72 38 88 09 00 F1 00 00 99 30 92 51 61 95 80 0A E8 32 9B FD 46 97 D9 EC 37}
+    }
+\end{figure}
 
 \subsection{Nachrichtentypen}
 Neben den normalen Kurznachrichten bietet der SMS-Standard noch drei weitere Textnachrichtentypen:
@@ -147,6 +138,126 @@ Neben den normalen Kurznachrichten bietet der SMS-Standard noch drei weitere Tex
 		Wird z.B. von Polizei zur Personenortung genutzt.
 	\item \textbf{Concatenated Message:} Mehrere Kurzmitteilungen werden zu einer Nachricht zusammengestellt.
 \end{itemize}
+
+\subsection{Übertragung}
+SMS nutzt einen Signalisierungskanel des GSM-Standards wie etwa SDCCH (Stand-alone Dedicated Control Channel) 
+oder FACCH (Fast Associated Control Channel). Diese Kanäle werden auch genutzt, um Gespräche aufzubauen und zu 
+halten.
+
+Kurzmitteilungen können parallel zu Telefongesprächen empfangen/gesendet werden. Teil der Bandbreite des 
+Verkehrsdatenkanals wird hier temporär zum Signailiserungskanal (SACCH) umkonfiguriert.
+
+
+\subsection{Technische Realisierung über GSM}
+Der Short Message Service wird durch den Mobile Application Part (MAP) des SS\#7 Protokolls (Signaling 
+System No. 7) realisiert. Die Elemente des Short Message Protokolls werden als Felder innerhalb von MAP
+Nachrichten durch das Netzwerk transportiert. Bei der Übertragung von Kurznachrichten vom Empfänger zum
+Service Center wird die Prozedur \textit{Mobile Originated (MO) short message service transfer} genutzt,
+für die Übertragung vom Service Center zum Empfänger die Prozedur \textit{Mobile Terminated (MT) short
+message service transfer}. Zum Abhandeln von Fehlern und Verwalten von Warteschlangen stehen zudem die 
+Prozeduren \textit{Short message alert procedure} und \textit{Short message waiting data set procedure} 
+zur Verfügung.
+Im folgenden werden diese vier Prozeduren genauer beschrieben.
+
+
+\subsubsection{Mobile Originated Short Message Service Transfer}
+Immer wernn ein Nutzer eine SMS versende, wird diese zum nächsten VMSC/SGSN (Mobile Switching 
+Center/GPRS Core Network) gesendet. Neben der Textnachricht werden Zieladresse und die Adresse des 
+SMSCs übermittelt. 
+
+Die Adresse des SMSCs ist hierbei in der Telefonkonfiguration der SIM-Karte definiert. Das VMSC/SGSN 
+ruft das MAP service package MAP\_MO\_FORWARD\_SHORT\_MESSAGE auf um die Nachricht an das spezifizierte 
+Interworking MSC des Service Senters zu senden. Der Service sendet die mo-ForwardSM MAP Operation --
+Eingebettet in den Transaction Capabilities Application Part (TCAP) -- an das SMSC, welches in der 
+Nachricht angegenben wurde. Der Transport erfolgt hierbei über das Core Network mittels Signaling 
+Connection Control Part (SCCP).
+
+\begin{figure}[htm]
+    \centering
+	\includegraphics[width=0.8\textwidth]{img/mo-forward-sm.png}
+    \label{fig:mo-forward-sm}
+    \caption{Transport einer Kurznachricht vom Sender zum Service Center}
+\end{figure}	
+
+Nach Erhalt der MAP mo-ForwardSM Nachricht gibt das Interworking MSC des SMSC die SMS-PP Application 
+Protocol Data Unit (APDU) (beinhaltet den Nachrichtentext) an das zuständige Service Center des SMSC 
+weiter. Hier wird sie gespeichert und anschließend versucht an die Zieladresse auszuliefern. Das 
+Service Center liefert als Submission Status eine Erfolgs- oder Fehlermeldung zurück.
+
+Nach Erhalt des Submission Status vom Service Center sendet das Interworking MSC eine Benachrichtigung
+zurück an das VMSC/SGSN des Senders. Von dort aus wird die Benachrichtigung über Funk an den Sender
+ausgeliefert.
+
+
+\subsubsection{Mobile Terminated Short Message Service Transfer}
+Wenn das SMSC feststellt, das es eine SMS ausliefern soll, dann sendet es die SMS-PP APDU der Nachricht 
+an die Gateway MSC (GMSC) Komponente des SMSC. Das GMSC muss nach dem Empfangen der Nachricht die Position
+des Empfängers herausfinden (in diesem Zusammenahng ist der Begriff Gateway MSC ein MSC, das Routing 
+Informationen aus dem Home Location Register (HLR) bezieht). Dies geschieht, indem das GMSC das MAP service
+package MAP\_SEND\_ROUTING\_INFO\_FOR\_SM aufruft, welches eine sendRoutingInfoForSM (SRI-for-SM) MAP 
+Nachricht an das HLR der Ziernummer sendet, um die aktuelle Position des Empfängers anzufragen.
+Die SRI-for-SM-Nachricht kann entweder an ein HLR im gleichen Netzwerk, oder aber über eine Verbindung zu
+einem HLR in einem fremden PLMN (Public land mobile network), gesendet werden (je nachdem zu welchem 
+Netzwerk der Empfänger gehört).
+
+Das HLR macht einen Database lookup und sendet die Daten zur aktuellen Position des Empfängers an das 
+GMSC des SMSCs zurück. Diese Positionsdaten können entweder die Adresse des MSC sein, über welches der 
+Empfänger gerade erreichbar ist, die SGSN Adresse, oder beides. Das HLR kann ebenfalls eine Fehlermeldung 
+zurücksenden, fall der Empfänger nicht für Kurznachrichten geeignet ist.
+
+Sobald das GMSC die Routing Informationen erhalten hat, versucht es die Nachricht an den Empfänger zu 
+übermitteln. Diese geschieht die das Aufrufen desMAP\_MT\_FORWARD\_SHORT\_MESSAGE services, welcher eine
+MAP mt-ForwardSM Nachricht an die vom HLR bereitgestellte Adresse sendet. Dabei ist es egal, ob es sich 
+hierbei um ein MSC oder SGSN handelt.
+
+Das VMSC fragt die benötigten Informationen zum Ausliefern der Nachricht beim Visitor Location Register
+(VLR) durch eine Send\_Infor\_for\_MS\_SMS Nachricht ab. Das VLR sucht daraufhin nach dem Empfänger und
+liefert die Mobile Subscriber ISDN Number (MSISDN) des Empfängers an das VMSC zurück. Im Fehlerfall wird 
+eine Benachrichtigung an das VMSC gesendet, die Auslieferung des SMS abgebrochen, und der gescheiterte 
+Zustellversuch beim SMSC gemeldet. Em Erfolgsfall sendet das VMSC eine Erfolgsnachricht an das SMSC.
+
+Die GMSC Komponente des SMSC reicht das Ergebnis des Zustellversuchs an das Service Center weiter. Im
+Erfolgsfall wird die Nachricht aus der Store and Forward Engine (SFE) entfernt und, falls angefordert,
+ein Zustellreport an den Sender geschickt. Bei einem gescheiterten Zustellversuch versucht das SMSC
+periodisch die Nachricht für eine bestimmte Vorhaltezeit zuzstellen. Das SMSC registiert sich eventuell 
+beim HLR, um über eine erneute Verfügbarkeit des Empfängers benachrichtigt zu werden.
+
+\begin{figure}[htm]
+    \centering
+	\includegraphics[width=0.8\textwidth]{img/mt-forward-sm.png}
+    \label{fig:mt-forward-sm}
+    \caption{Transport einer Kurznachricht vom Service Center zum Empfänger}
+\end{figure}	
+
+\subsubsection{Failed Short Message Delivery}
+Falls das SMSC/SGSN einen Fehler bei der Auslieferung anzeigt, dann sendet das SMSC mit Hilfe der 
+MAP Prozedur MAP\_REPORT\_SM\_DELIVERY\_STATUS eine Nachricht an das HLR, welche den Grund des Fehlers
+angeibt und zusätzlich eine Anfrage zur automatischen Benachrichtigung des SMSC durch das HLR über die 
+Zieladresse stellt.
+
+Das HLR setzt ein Flag für den Zielaccount, welches angibt, dass dieser momentan für die Übermittlung von 
+Kurznachrichten nicht verfügbar ist und speichert die Adresse des SMSCs in der Message Waiting Data (MWD) 
+Liste des Ziels. Gültige Flags sind hierbei: Mobile Not Reachable (MNRF), Memory Capacity Exceeded (MCEF), 
+Mobile Not Reachable for GPRS (MNRG). Ab diesem Zeitpunkt antwortet das HLR auf SRI-for-SM-Requests mit 
+einem Fehler und fügt die Adressen der anfragenden SMSC automatisch der MWD Liste des Ziel hinzu. Sollte 
+ein SRI-for-SM Request ein gesetztes Priority Flag haben, dann antwortet das HLR mit der VLR-Adresse, 
+falls diese verfügbar ist.
+
+Das HR kann auf verschieden Wegen über die erneute Verfügbarkeit für Kurznachrichten eines Teilnehmers 
+informiert werden:
+\begin{itemize}
+    \item Der Teilnehmer wurde vom Netzwerk getrennt. Eine Neuverbindung löst ein Location Update beim 
+    HLR aus.
+    \item Der Teilnehmer befand sich in einem ``Funkloch'', wurde jedoch nicht komplett vom Netzwerk
+    getrennt. Beim erneuten Eintritt in einen abgedeckten Netzbereich antwortet es auf Page Requests
+    des VLRs. Das VLR sendet daraufhin eine Ready-for-SM Nachricht and das HLR.
+    \item Wenn der Telefonspeicher voll war und der Teilnehmer daraufhin einige Nachrichten löscht, so
+    wird eine Ready-for-SM Nachricht vom VMSC/VLR an das HLR gesendet.
+\end{itemize}
+
+Sobald das HLR über die erneute Verfügbarkeit des Teilnehmers informiert wurde, sendet es eine AlertSC 
+MAP message an jedes in der MWD Liste des Teilnehmers registierte SMSC, wodurch der SMS-Zustellprozess
+erneut gestartet wird.
 
 % \subsection{Shortcodes}
 % \begin{itemize}
@@ -189,117 +300,6 @@ Neben den normalen Kurznachrichten bietet der SMS-Standard noch drei weitere Tex
 % 	\item \textit{Grafik SMSC, SMPP, SMS Broker anführen \\(Computer-SMS\_pdf.pdf, Figure 1)}
 % \end{itemize}
 
-% \subsection{SMS Technische Realisierung über GSM}
-% \begin{itemize}
-% 	\item Realisiert durch den Mobile Application Part (MAP) des SS\#7 Protokolls (Signaling System No. 7)
-% 	\item Elemente des Short Message Protokolls werden als Felder innerhalb von MAP Nachrichten 
-% 		durch das Netzwerk transportiert
-% 	\item Vier MAP Prozeduren zur Kontrolle des Short Message Services:
-% 		\begin{itemize}
-% 			\item Mobile Originated (MO) short message service transfer
-% 			\item Mobile Terminated (MT) short message service transfer
-% 			\item Short message alert procedure
-% 			\item Short message waiting data set procedure
-% 		\end{itemize}
-% \end{itemize}
-
-% \subsubsection{MO short message service transfer}
-% \begin{itemize}
-% 	\item Immer wenn ein Nutzer eine SMS versendet, wir diese zunächst zum 
-% 		VMSC/SGSN (Mobile Switching Center/GRPS Core Network) geschickt
-% 	\item Neben der Textnachricht werden Zieladresse und die Adresse des 
-% 		SMSCs übermittelt (Addresse des SMSCs in der Telefonkonfiguration der SIM-Karte 
-% 		definiert)
-% 	\item VMSC/SGSN ruft MAP service package MAP\_MO\_FORWARD\_SHORT\_MESSAGE auf um 
-% 		Nachricht an das spezifizierte Interworking MSC des Service Centers zu senden
-% 	\item Der Service sendet die mo-ForwardSM MAP Operation an das SMSC, welches 
-% 		in der Nachricht angegeben wurde. Eingebettet in Transaction Capabilities Application
-% 		Part (TCAP). Tranport zum Core Network erfolgt über den Signaling Ceonnection 
-% 		Control Prt (SCCP)
-% 	\item Nach Erhalt der MAP mo-ForwardSM Nachricht gibt das Interworking MSC des SMSC die 
-% 		SMS-PP Application Protocal Data Unit (APDU) (beinhaltet den Nachrichtentext) an 
-% 		das zuständige Service Center des SMSC weiter. Hier wird sie gespeichert und 
-% 		anschließend versucht an die Zieladresse auszuliefern. SC gibt Bestätigung von 
-% 		Fehler der Erfolg zurück.
-% 	\item Nach Erhalt des Submission Satus vom SC sendet das Interworking MSC eine 
-% 		Benachrichtung zurück an das VMSC/SGSN des Senders, von dort aus wird die 
-% 		Benachrichtigung über Funk an den Sender ausgeliefert
-% 	\item \textit{Grafik MO anfügen \\(http://en.wikipedia.org/wiki/Short\_message\_service\_technical\_realisation\_(GSM))}
-% \end{itemize}
-
-% \subsubsection{MT short message service transfer}
-% \begin{itemize}
-% 	\item Wenn SMSC feststellt, dass es eine SMS ausliefern soll, dann sendet es die 
-% 		SMS-PP APDU der an die Gateway MSC (GMSC) Kompomente des SMSC.
-% 	\item Das GMSC muss nach dem Empfangen der Nachricht die Position des Empfängers 
-% 		herausfinden (in diesem Zusammenhang ist der Begriff Gateway MSC ein MSC das 
-% 		Routing Informationen aus dem Home Location Register (HLR) bezieht). 
-% 		Dies geschieht, indem das GMSC das MAP service package \\
-% 		MAP\_SEND\_ROUTING\_INFO\_FOR\_SM aufruft, welches eine \\ sendRoutingInfoForSM 
-% 		(SRI-for-SM) MAP Nachricht an das HLR der Zielnummer sendet, um die 
-% 		aktuelle Position des Empfängers anzufragen
-% 	\item Die SRI-for-SM-Nachricht kann entweder an ein HLR im gleichen Netzwerk, oder 
-% 		aber über eine Verbindung zu einem HLR in einem fremden PLMN (Public land mobile 
-% 		network), gesendet werden (je nachdem zu welchem Netzwerk der Empfänger gehört)
-% 	\item Das HLR macht einen Database lookup und sendet Daten zur aktuellen Position des 
-% 		Empfängers an das GMSC des SMSCs zurück. Diese Positionsdaten können entweder die 
-% 		Adresse des MSC sein, über welches der Empfänger gerade erreichbar ist, die 
-% 		SGSN Adresse, oder beides. Das HLR kann ebenfalls eine Fehlermeldung zurücksenden, 
-% 		falls der Empfänger nicht für Kurznachrichten geeignet ist.
-% 	\item Sobald das GMSC die Routing Informationen erhalten hat, versucht des die 
-% 		Nachricht an den Empfänger zu übermitteln. Dies geschieht durch Aufrufen des \\
-% 		MAP\_MT\_FORWARD\_SHORT\_MESSAGE services, welcher eine \\ 
-% 		MAP mt-ForwardSM Nachricht 
-% 		an die vom HLR bereitgestellte Adresse sendet. Dabei ist es egal, ob es 
-% 		sich hierbei um ein MSC oder SGSN handelt
-% 	\item Das VMSC fragt die benötigten Informationen zum Ausliefern der Nachricht beim VLR 
-% 		durch eine Send\_Info\_for\_MS\_SMS Nachricht ab. Das VLR sucht daraufhin nach dem 
-% 		Empfänger und liefert die Mobile Subscriber ISDN Number (MSISDN) des Empfängers an 
-% 		das VMSC zurück (im Fehlerfall wird Fehlermeldung gesendet; in diesem Fall wird 
-% 		Auslieferung der SMS abgebrochen und beim SMSC gemeldet. Im Erfolgsfall sendet das VMSC Erflogsnachricht an SMSC)
-% 	\item GMSC Komponente des SMSC reicht das Ergebnis des Zustellungsversuchs an das SC 
-% 		weiter. Im Erfolgsfall wird die Nachricht aus der Store and Forward Engine (SFE) 
-% 		entfernt und, falls angefordert, ein Zustellreport an den Sender geschickt.
-% 	\item Bei einem gescheiterten Zustellungsveruch versucht das SMSC periodisch die 
-% 		Nachricht für eine bestimmte Vorhaltezeit zuzustellen; SMSC registiert sich 
-% 		eventuell beim HLR, um über die Verfügbarkeit des Empfängers benachrichtigt zu 
-% 		werden.
-% 	\item \textit{Grafik MT anfügen \\(http://en.wikipedia.org/wiki/Short\_message\_service\_technical\_realisation\_(GSM))}
-% \end{itemize}
-
-% \subsubsection{Failed short message delivery}
-% \begin{itemize}
-% 	\item Falls das VMSC/SGSN einen Fehler bei der Auslieferung anzeigt, dann sendet das SMSC mit Hilfe der MAP Prozedur 
-% 		MAP\_REPORT\_SM\_DELIVERY\_STATUS eine Nachricht an das HLR, welche den Grund des Fehlers angibt und zusätzlich 
-% 		eine Anfrage zur automatischen Benachrichtigung des SMSC durch das HLR über die Verfügbarkeit der Zieladresse stellt.
-% 	\item Das HLR setzt ein Flag für den Zielaccount, welches angibt, dass dieser momentan für die Übermittlung von Kurznachrichten 
-% 		nicht verfügbar ist ud speichert die Adresse das SMSCs in der Message Waiting Data (MWD) Liste des Ziels.
-% 	\item Gültige Flags:
-% 		\begin{itemize}
-% 			\item Mobile Not Reachable Flag (MNRF)
-% 			\item Memory Capacity Exceeded Flag (MCEF)
-% 			\item Mobile Not Reachable for GPRS (MNRG)
-% 		\end{itemize}
-% 	\item Ab diesem Zeitpunkt antwortet das HLR auf SRI-for-SM Requests mit einem Fehler und fügt die Adressen der anfragenden 
-% 		SMSCs automatisch der MWD Liste des Ziels hinzu (wenn SRI-for-SM Request ein gesetztes Priority-Flag hat, dann antwortet 
-% 		das HLR mit der VLR-Adresse, falls verfügbar).
-% 	\item Das HLR kann auf verschiedenen Wegen über die erneute Verfügbarkeit für Kurznachrichten eines Teilnehmers informiert werden:
-% 		\begin{itemize}
-% 			\item Teilnehmer wurde vom Netzwerk getrennt, eine Neuverbindung löst ein Location Update beim HLR aus.
-% 			\item Teilnehmer befand sich in ``Funkloch'', wurde jedoch nicht komplett vom Netzwerk getrennt. Beim erneuten Eintritt in 
-% 				einen abgedeckten Netzbereich antwortet es auf Page Requests des VLRs. Das VLR sendet daraufhin eine Ready-for-SM Nachricht 
-% 				an das HLR
-% 			\item Wenn der Telefonspeicher voll war und der Teilnehmer daraufhin einige Nachrichten löscht, so wird eine Ready-for-SM 
-% 				Nachricht vom VMSC/VLR an das HLR gesendet.
-% 		\end{itemize}
-% 	\item Sobald HLR über die erneute Verfügbarkeit des Teilnehmers informiert wurde, sendet es eine AlertSC MAP message an jedes 
-% 		in der MWD Liste des Teilnehmers registrierte SMSC, wodurch der SMS-Zustellprozess erneut gestartet wird.
-% \end{itemize}
-
-% \subsubsection{MAP Transport Protocols}
-% \begin{itemize}
-% 	\item TODO for Paper
-% \end{itemize}
 
 \subsection{Nachteile von SMS}
 Mit der voranschreitenden Entwicklung der mobilen Datennetzen und Endgeräte ist die klassische SMS in vielen Belangen
