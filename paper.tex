@@ -14,7 +14,7 @@
 \usepackage{subfig}
 \usepackage[colorlinks=false,pdfborder={0 0 0}]{hyperref}
 
-
+\bibliographystyle{plain}
 \pagestyle{plain}
 \pagenumbering{arabic}
 \frenchspacing
@@ -57,19 +57,12 @@ wurde 1989 verabschiedet. Finn Trosby von der norwegischen Telenor war es, der
 Message Handling) mit dieser das erste technische Design erarbeitete und 
 standardisierte.
 Vorn 1990 bis 2009 wurde der SMS-Standard in dieser Gruppe unter Leitung von 
-Kevin Holly von Cellnet und Ian Harris von Vodafone weiterentwickelt.
+Kevin Holly von Cellnet und Ian Harris von Vodafone weiterentwickelt\cite{wikipedia:sms}.
 
 Die erste Kurzmitteilung des Short Message Service wurde am 3. Dezember 1992 
 von einem PC an ein Mobiltelefon im britischen Vodafone-Netz gesendet. Dies 
 war etwa ein Jahr nach der Einführung des GSM-Standards für Mobiltelefone in 
 Europa.
-
-SMS war ursprünglich dazu gedacht über den Signalisierungskanal zum Rufaufbau
-Mitteilungen über Netzstörungen oder ähnliche Informationen an die Nutzer zu
-senden. Der Dienst wurde daher zunächst kostenlos angeboten, entwickelte sich
-jedoch zum größten Ertragsbringer der Netzbetreiber. Der Steuerungsaufwand ist
-hier verglichen mit einem Telefongespräch sehr gering, was entsprechend höhere
-Gewinnmargen für die Netzbetreiber bedeutet.
 
 \section{SMS über GSM} % {{{
 \subsection{Spezifikation}
@@ -81,12 +74,12 @@ zwischen externen \textit{Short Message Entities} (SMEs) und einem SMSC. SMEs si
 Software-Anwendungen auf Netzwerkkomponenten oder Hardware-Geräte, welche SMS
 senden und empfangen können. Das \textit{Short Message Peer-to-Peer Protocol} (SMPP) 
 wird hierbei für die Interaktion zwischen SMEs und SMSCs verschiedener 
-Hersteller genutzt.
+Hersteller genutzt\cite{thesms}.
 
 Das SMSC arbeitet dabei entweder nach dem \textit{Store-and-Forward} oder 
 \textit{Forward-and-Forget}-Prinzip. Beim \textit{Store-and-Forward}-Prinzip versucht das System 
 die Nachricht regelmäßig für eine festgelegte Vorhaltezeit an den Empfänger 
-zu übermitteln, bis diese erfolgreich bei ihm eingetroffen ist. Nachrichten, die innnerhalb 
+zu übermitteln, bis diese erfolgreich bei ihm eingetroffen ist\cite{held:down}. Nachrichten, die innnerhalb 
 der Vorhaltezeit nicht zugestellt werden konnten, werden von SMSC gelöscht. 
 Ist die Empfängernummer dem SMSC unbekannt, lehnt es diese sofort an.
 Arbeitet das SMSC nach dem \textit{Forward-and-Forget}-Prinzip, dann werden Nachrichten ohne 
@@ -96,7 +89,7 @@ das \textit{Store-and-Forward}-Prinzip benutzt.
 
 Eine SMS-Nachricht kann gewöhnlich bis zu 160 7-Bit-kodierte Zeichen beinhalten. 
 Es sind jedoch auch 8-Bit- und 16-Bit-Kodierungen möglich. Hierbei beträgt die 
-maximale Nachrichtenlänge 140 bzw. 70 Zeichen. 
+maximale Nachrichtenlänge 140 bzw. 70 Zeichen\cite{thesms}. 
 
 SMS können auch dazu benutzt werden Binärdaten zu senden, wie zum Beispiel 
 Klingeltöne oder Bildnachrichten. Spezielle Anwendungen auf 
@@ -158,18 +151,18 @@ Zur Übertragung nutzt der Short Message Service nutzt einen Signalisierungskane
 Diese Kanäle werden auch genutzt, um Gespräche aufzubauen und zu halten.
 
 Kurzmitteilungen können parallel zu Telefongesprächen empfangen/gesendet werden. Teil der Bandbreite des 
-Verkehrsdatenkanals wird hier temporär zum Signailiserungskanal (SACCH) umkonfiguriert.
+Verkehrsdatenkanals wird hier temporär zum Signailiserungskanal (SACCH) umkonfiguriert\cite{wikipedia:sms}.
 
 
 \subsection{Technische Realisierung über GSM}
 Der Short Message Service wird durch den \textit{Mobile Application Part} (MAP) des SS\#7 Protokolls (\textit{Signaling 
-System No. 7}) realisiert. Die Elemente des Short Message Protokolls werden als Felder innerhalb von 
+System No. 7}) realisiert\cite{3gpp:map}. Die Elemente des Short Message Protokolls werden als Felder innerhalb von 
 MAP-Nachrichten durch das Netzwerk transportiert. Bei der Übertragung von Kurznachrichten vom Empfänger zum
 Service Center wird die Prozedur \textit{Mobile Originated (MO) Short Message Service Transfer} genutzt,
 für die Übertragung vom Service Center zum Empfänger die Prozedur \textit{Mobile Terminated (MT) Short
 Message Service Transfer}. Zum Abhandeln von Fehlern und Verwalten von Warteschlangen stehen zudem die 
 Prozeduren \textit{Short Message Alert} und \textit{Short Message Waiting Data Set} 
-zur Verfügung. Die Funktionsweise dieser Prozeduren wird im folgenden genauer beschrieben.
+zur Verfügung\cite{3gpp:map}. Die Funktionsweise dieser Prozeduren wird im folgenden genauer beschrieben.
 
 
 \subsubsection{Mobile Originated Short Message Service Transfer}
@@ -177,23 +170,23 @@ Immer wenn ein Nutzer eine SMS versendet, wird diese zum nächsten VMSC/SGSN (\t
 Center/GPRS Core Network}) gesendet. Neben der Textnachricht werden Zieladresse und die Adresse des 
 SMSCs übermittelt. 
 
-Die Adresse des SMSCs ist hierbei in der Telefonkonfiguration der SIM-Karte definiert. Das VMSC/SGSN 
+Die Adresse des SMSCs ist hierbei in der Telefonkonfiguration der SIM-Karte definiert\cite{3gpp:smpp}. Das VMSC/SGSN 
 ruft das MAP service package \textit{MAP\_MO\_FORWARD\_SHORT\_\-MESSAGE} auf um die Nachricht an das spezifizierte 
 \textit{Interworking MSC} des Service Centers zu senden. Der Service sendet die \textit{mo-ForwardSM} MAP-Operation --
 eingebettet in den \textit{Transaction Capabilities Application Part (TCAP)} -- an das SMSC, welches in der 
 Nachricht angegeben wurde. Der Transport erfolgt hierbei über das \textit{Core Network} mittels des \textit{Signaling 
-Connection Control Parts} (SCCP).
+Connection Control Parts} (SCCP)\cite{3gpp:smpp}.
 
 \begin{figure}[htm]
     \centering
-	\includegraphics[width=0.8\textwidth]{img/mo-forward-sm.png}
+	\includegraphics[width=0.9\textwidth]{img/mo-forward-sm.png}
     \label{fig:mo-forward-sm}
     \caption{Transport einer Kurznachricht vom Sender zum Service Center}
 \end{figure}	
 
 Nach Erhalt der \textit{mo-ForwardSM} MAP-Nachricht gibt das \textit{Interworking MSC} des SMSC die SMS-PP \textit{Application 
 Protocol Data Unit} (APDU) (beinhaltet den Nachrichtentext) an das zuständige Service Center des SMSC 
-weiter. Hier wird sie gespeichert und anschließend versucht an die Zieladresse auszuliefern. Das 
+weiter\cite{3gpp:techrel}. Hier wird sie gespeichert und anschließend versucht an die Zieladresse auszuliefern. Das 
 Service Center liefert als Submission Status eine Erfolgs- oder Fehlermeldung zurück.
 
 Nach Erhalt des Submission Status vom Service Center sendet das \textit{Interworking MSC} eine Benachrichtigung
@@ -203,7 +196,7 @@ ausgeliefert.
 
 \subsubsection{Mobile Terminated Short Message Service Transfer}
 Wenn das SMSC feststellt, dass es eine SMS ausliefern soll, dann sendet es die SMS-PP APDU der Nachricht 
-an die \textit{Gateway MSC} (GMSC) Komponente des SMSC. Das GMSC muss nach dem Empfangen der Nachricht die Position
+an die \textit{Gateway MSC} (GMSC) Komponente des SMSC\cite{3gpp:techrel}. Das GMSC muss nach dem Empfangen der Nachricht die Position
 des Empfängers herausfinden (in diesem Zusammenahng ist der Begriff \textit{Gateway MSC} ein \textit{Mobile Switching Center}, das Routing 
 Informationen aus dem \textit{Home Location Register} (HLR) bezieht). Dies geschieht, indem das GMSC das MAP-Servicepaket 
 \textit{MAP\_SEND\_ROUTING\_INFO\_FOR\_SM} aufruft, welches eine \textit{sendRoutingInfoForSM} (SRI-for-SM) 
@@ -230,13 +223,13 @@ Zustellversuch beim SMSC gemeldet. Em Erfolgsfall sendet das VMSC eine Erfolgsna
 
 Die GMSC Komponente des SMSC reicht das Ergebnis des Zustellversuchs an das Service Center weiter. Im
 Erfolgsfall wird die Nachricht aus der \textit{Store and Forward Engine} (SFE) entfernt und -- falls angefordert --
-ein Zustellreport an den Sender geschickt. Bei einem gescheiterten Zustellversuch versucht das SMSC
+ein Zustellreport an den Sender geschickt\cite{3gpp:techrel}. Bei einem gescheiterten Zustellversuch versucht das SMSC
 periodisch die Nachricht für eine bestimmte Vorhaltezeit zuzstellen. Das SMSC registiert sich eventuell 
 beim HLR, um über eine erneute Verfügbarkeit des Empfängers benachrichtigt zu werden.
 
 \begin{figure}[htm]
     \centering
-	\includegraphics[width=0.8\textwidth]{img/mt-forward-sm.png}
+	\includegraphics[width=0.9\textwidth]{img/mt-forward-sm.png}
     \label{fig:mt-forward-sm}
     \caption{Transport einer Kurznachricht vom Service Center zum Empfänger}
 \end{figure}	
@@ -269,7 +262,7 @@ informiert werden:
 
 Sobald das HLR über die erneute Verfügbarkeit des Teilnehmers informiert wurde, sendet es eine AlertSC 
 MAP message an jedes in der MWD Liste des Teilnehmers registierte SMSC, wodurch der SMS-Zustellprozess
-erneut gestartet wird.
+erneut gestartet wird\cite{3gpp:map}.
 
 % \subsection{Message aggregators}
 % \begin{itemize}
@@ -289,9 +282,10 @@ nicht mehr zeitgemäß und bietet eine ganze Reihe an Nachteilen:
 	\item \textbf{Multi-Device:} Der SMS Service ist an eine einzige Mobilfunknummer gebunden, was in der heutigen Zeit -- 
 		wo Laptops, Tablets, Smartphones und PCs benutzt werden -- einen großen Nachteil gegenüber SMS Alternativen 
 		bildet, welche die Möglichkeit bieten, einen Account auf mehreren Geräten gleichzeitig nutzen zu können.
-	\item \textbf{Kosten:} SMS sind teuer. Rechenbeispiel: Geht man von 20 Cents/SMS aus, dann entspricht das bei einer Länge von 
+	\item \textbf{Kosten:} SMS sind teuer. Ein Rechenbeispiel: Geht man von 20 Cents/SMS aus, dann entspricht das bei einer Länge von 
         140 Bytes pro Nachricht Kosten in Höhe von 0.14 Cents pro Byte. Bei einer Datenflat für \$30 pro 2GB entspricht das 
-        0.000003 Cents pro Byte.
+        0.000003 Cents pro Byte. Die Kosten einer Datenflat sind also für den Nutzer wesentlich attraktiver als die Kosten für 
+        herkömmliche SMS-Nachrichten.
 	\item \textbf{Real-Time:} Es gibt keine Garantie für die Zustellzeit. Die Zustellung kann manchmal viel Zeit in Anspruch nehmen. 
 		Desweiteren gibt es kein ``is typing'' Feature, welches aus vielen anderen Messengern bekannt ist. Apple iMessage z.B. bietet 
 		dieses Feature und kommt zudem mit geringeren Zustellzeiten aus.
@@ -396,5 +390,7 @@ nicht den Limitationen des GSM-Standards unterliegen.
 	
 
 % section rcs }}}
+
+\bibliography{cites}
 
 \end{document}
