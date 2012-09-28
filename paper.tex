@@ -13,6 +13,7 @@
 \usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
 \usepackage{subfig}
 \usepackage[colorlinks=false,pdfborder={0 0 0}]{hyperref}
+\usepackage{eurosym}
 
 \bibliographystyle{plain}
 \pagestyle{plain}
@@ -75,6 +76,13 @@ Software-Anwendungen auf Netzwerkkomponenten oder Hardware-Geräte, welche SMS
 senden und empfangen können. Das \textit{Short Message Peer-to-Peer Protocol} (SMPP) 
 wird hierbei für die Interaktion zwischen SMEs und SMSCs verschiedener 
 Hersteller genutzt\cite{thesms}.
+
+\begin{figure}[htm]
+    \centering
+	\includegraphics[width=0.9\textwidth]{img/smspp.png}
+    \label{fig:smspp}
+    \caption{Interaktionen zwischen SMSCs und SMEs}
+\end{figure}	
 
 Das SMSC arbeitet dabei entweder nach dem \textit{Store-and-Forward} oder 
 \textit{Forward-and-Forget}-Prinzip. Beim \textit{Store-and-Forward}-Prinzip versucht das System 
@@ -282,8 +290,8 @@ nicht mehr zeitgemäß und bietet eine ganze Reihe an Nachteilen:
 	\item \textbf{Multi-Device:} Der SMS Service ist an eine einzige Mobilfunknummer gebunden, was in der heutigen Zeit -- 
 		wo Laptops, Tablets, Smartphones und PCs benutzt werden -- einen großen Nachteil gegenüber SMS Alternativen 
 		bildet, welche die Möglichkeit bieten, einen Account auf mehreren Geräten gleichzeitig nutzen zu können.
-	\item \textbf{Kosten:} SMS sind teuer. Ein Rechenbeispiel: Geht man von 20 Cents/SMS aus, dann entspricht das bei einer Länge von 
-        140 Bytes pro Nachricht Kosten in Höhe von 0.14 Cents pro Byte. Bei einer Datenflat für \$30 pro 2GB entspricht das 
+	\item \textbf{Kosten:} SMS sind teuer. Ein Rechenbeispiel: Geht man von 16 Cents/SMS aus, dann entspricht das bei einer Länge von 
+        140 Bytes pro Nachricht Kosten in Höhe von 0.11 Cents pro Byte. Bei einer Datenflat für \EUR{30} pro 2GB entspricht das 
         0.000003 Cents pro Byte. Die Kosten einer Datenflat sind also für den Nutzer wesentlich attraktiver als die Kosten für 
         herkömmliche SMS-Nachrichten.
 	\item \textbf{Real-Time:} Es gibt keine Garantie für die Zustellzeit. Die Zustellung kann manchmal viel Zeit in Anspruch nehmen. 
