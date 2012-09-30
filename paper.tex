@@ -12,11 +12,12 @@
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
 \usepackage{subfig}
+\usepackage[hyphens]{url}
 \usepackage[colorlinks=false,pdfborder={0 0 0}]{hyperref}
 \usepackage{eurosym}
 \usepackage{epstopdf}
+\usepackage[numbers,sort]{natbib}
 
-\bibliographystyle{plain}
 \pagestyle{plain}
 \pagenumbering{arabic}
 \frenchspacing
@@ -406,7 +407,7 @@ nicht den Limitationen des GSM-Standards unterliegen.
 % 	\item In Deutschland:
 % 		\begin{itemize}
 % 			\item Vodafone Juni 2012 \url{http://www.vodafone.de/unternehmen/presse/pm-archiv-2012i_199573.html}
-% 			\item T-Mobile Oktober 2012
+% 			\item T-Mobile Oktoben 2012
 % 			\item O2 2013
 % 		\end{itemize}
 % \end{itemize}
@@ -438,7 +439,7 @@ gezogen.
 
  \begin{figure}
      \centering
-     \includegraphics[width=\textwidth]{plot/datenraten-eps-converted-to.pdf}
+     \includegraphics[width=0.9\textwidth]{plot/datenraten}
      \caption{Vergleich der maximalen Datenraten von Mobilfunkstandards}
 
      \label{fig:datenraten}
@@ -447,8 +448,6 @@ gezogen.
 
  \subsection{Hersteller und Drittanbieter Lösungen} % {{{
  \label{sub:drittanbieter}
-
- % TODO: Quellen einfügen
 
  Durch die Anbindung des Internets an die Mobilfunknetze war es mit geeigneten Endgeräten möglich
  über Webdienste bekannte Instant Messaging-Protokolle wie \textit{XMPP} oder \textit{ICQ} zu
@@ -489,7 +488,7 @@ gezogen.
  \subsection{Rich Communication Suite-enhanced} % {{{
  \label{sub:rcs-e}
 
-  \textit{Rich Communication Suite-enhanced (RCS-e)} ist ein Industriestandard für die
+ \textit{Rich Communication Suite-enhanced (RCS-e)} \cite{rcs} ist ein Industriestandard für die
   Kommunikation von mobilen Endgeräten. Er wird seit 2008 entwickelt und vorallem durch den
   Branchenverband \textit{GSM Association (GSMA)} vorangetrieben. Es werden verschiedene Standards der
   Organisationen \textit{3GPP}, \textit{OMA} und \textit{IETF} genutzt. Ein Überblick über die
@@ -499,7 +498,7 @@ gezogen.
 
  \begin{figure}
      \centering
-     \includegraphics[width=\textwidth]{img/rcs-e-overview}
+     \includegraphics[width=0.9\textwidth]{img/rcs-e-overview}
      \caption{Überblick der Komponenten des RCS-e 5.0 Standards \cite{rcs:spec}}
      \label{fig:rcs-e-overview}
  \end{figure}
@@ -507,19 +506,18 @@ gezogen.
   \subsubsection{Vermarktung} % {{{
   \label{ssub:vermarktung}
 
-  Der Dienst wird unter dem Namen \textit{Joyn} als \glqq{}Nachfolger der
-  SMS\grqq{} von den Mobilfunkanbieter vermarktet. Allerdings ist schon durch die Vielzahl an
-  Funktionen zu erkennen, dass der Dienst mehr umfasst als nur die
-  Übertragung von Textnachrichten. Dieser neue Dienst soll von den wichtigsten
-  Mobilplatformen unterstützt werden. Dazu sollen anfangs Apps angeboten werden aber im Laufe der
-  Zeit soll eine direkte Integration in die mobilen Betriebssysteme erfolgen. Die Version 5.0
-  des Standards wurde zum Zeitpunkt der GSMA \textit{Mobile World
-      Congress (MWC)} 2012 in Spanien freigegeben. Gleichzeitig wurde auf der MWC eine
-  funktionierende Implementation des Standards präsentiert. Anschließend startete Vodafone Spaninen
-  eine Beta-Phase mit einer Android-App.
+  Der Dienst wird unter dem Namen \textit{Joyn} \cite{joyn} als \glqq{}Nachfolger der SMS\grqq{} von
+  den Mobilfunkanbieter vermarktet. Allerdings ist schon durch die Vielzahl an Funktionen zu
+  erkennen, dass der Dienst mehr umfasst als nur die Übertragung von Textnachrichten. Dieser neue
+  Dienst soll von den wichtigsten Mobilplatformen unterstützt werden. Dazu sollen anfangs Apps
+  angeboten werden aber im Laufe der Zeit soll eine direkte Integration in die mobilen
+  Betriebssysteme erfolgen. Die Version 5.0 des Standards wurde zum Zeitpunkt der GSMA
+  \textit{Mobile World Congress (MWC)} 2012 in Spanien freigegeben. Gleichzeitig wurde auf der MWC
+  eine funktionierende Implementation des Standards präsentiert. Anschließend startete Vodafone
+  Spaninen eine Beta-Phase mit einer Android-App.
 
-  In Deutschland wird Joyn seit September 2012 von Vodafone angeboten. Die Telekom plant den
-  1. Oktober 2012 als Starttermin. Von O2 ist noch kein Einführungstermin bekannt
+  In Deutschland wird Joyn seit September 2012 von Vodafone angeboten \cite{stern}. Die Telekom plant Dezember
+  2012 als Starttermin. Von O2 ist noch kein Einführungstermin bekannt
   und E-Plus plant vorläufig überhaupt keine Einführung des Dienstes.
 
   % subsubsection Vermarktung }}}
@@ -545,19 +543,19 @@ gezogen.
     ein Austausch mit den klassischen SMS bzw. MMS Systemen möglich. Das heißt, Nutzer des
     Joyn-Dienstes können mit Nutzern kommunizieren, welche nicht Joyn nutzen.
 
-    Die Nachrichten werden mittels OMA \textit{Converged IP Messaging (CPM)} übertragen. Dabei
-    existieren zwei Modi, der \textit{Pager} und \textit{Large Mode}. Hierbei hat der
-    \textit{Pager Mode} eine Begrenzung von 1300 Byte. In Abbildung \ref{fig:rcs-e-pager} ist
-    der Ablauf einer Nachrichtenübertragung mit Hilfe des CPM Pager Mode dargestellt. Dabei wird
-    die SIP Methode \texttt{MESSAGE} genutzt um die Nachricht direkt zu übertragen. Da die
-    Nachrichtengröße begrenzt ist, kann eine sichere und effiziente Vermittlung der Nachricht
-    erreicht werden. Überschreitet die Nachricht, die 1300 Byte Begrenzung, wird der CPM
-    Large Mode zur Übertragung genutzt. Der Ablauf einer solchen Übertragung ist in
-    Abbildung \ref{fig:rcs-e-large} abgebildet. Um größere Nachrichten effizient zu übertragen
-    wird dabei SIP nur zum Aufbau einer Sitzung genutzt. Die eigentliche Übertragung der Nachricht
-    wird dann mit Hilfe des \textit{Message Session Relay Protocol (MSRP)} realisiert. Dies
-    hat den Vorteil, dass das MSRP speziell für diese Anforderung ausgelegt und deshalb
-    für größere Datenmengen besser geeignet ist als SIP.
+    Die Nachrichten werden mittels OMA \textit{Converged IP Messaging (CPM)} übertragen
+    \cite{rcs:spec,rcs:cpm,oma:cpm}. Dabei existieren zwei Modi, der \textit{Pager} und
+    \textit{Large Mode}. Hierbei hat der \textit{Pager Mode} eine Begrenzung von 1300 Byte. In
+    Abbildung \ref{fig:rcs-e-pager} ist der Ablauf einer Nachrichtenübertragung mit Hilfe des CPM
+    Pager Mode dargestellt. Dabei wird die SIP Methode \texttt{MESSAGE} genutzt um die Nachricht
+    direkt zu übertragen. Da die Nachrichtengröße begrenzt ist, kann eine sichere und effiziente
+    Vermittlung der Nachricht erreicht werden. Überschreitet die Nachricht, die 1300 Byte
+    Begrenzung, wird der CPM Large Mode zur Übertragung genutzt. Der Ablauf einer solchen
+    Übertragung ist in Abbildung \ref{fig:rcs-e-large} abgebildet. Um größere Nachrichten effizient
+    zu übertragen wird dabei SIP nur zum Aufbau einer Sitzung genutzt. Die eigentliche Übertragung
+    der Nachricht wird dann mit Hilfe des \textit{Message Session Relay Protocol (MSRP)} realisiert.
+    Dies hat den Vorteil, dass das MSRP speziell für diese Anforderung ausgelegt und deshalb für
+    größere Datenmengen besser geeignet ist als SIP.
 
     Die Anbindung an das klassische SMS-System ist in Abbildung \ref{fig:rcs-e-sms} skizziert.
     Dieser Fall tritt ein, wenn eine SMS an einen Joyn-Nutzer gesendet wird oder dieser eine
@@ -570,21 +568,21 @@ gezogen.
 
  \begin{figure}
      \centering
-     \includegraphics[width=\textwidth]{img/rcs-e-pager}
+     \includegraphics[width=0.9\textwidth]{img/rcs-e-pager}
      \caption{RCS-e Nachrichtenübertragung im CPM Pager Mode \cite{rcs:spec}}
      \label{fig:rcs-e-pager}
  \end{figure}
 
  \begin{figure}
      \centering
-     \includegraphics[width=\textwidth]{img/rcs-e-large}
+     \includegraphics[width=0.9\textwidth]{img/rcs-e-large}
      \caption{RCS-e Nachrichtenübertragung im CPM Large Mode \cite{rcs:spec}}
      \label{fig:rcs-e-large}
  \end{figure}
 
  \begin{figure}
      \centering
-     \includegraphics[width=\textwidth]{img/rcs-e-sms}
+     \includegraphics[width=0.9\textwidth]{img/rcs-e-sms}
      \caption{RCS-e Nachrichtenübertragung mit SMS-Kompatibilität \cite{rcs:spec}}
      \label{fig:rcs-e-sms}
  \end{figure}
@@ -657,6 +655,7 @@ eine ähnlich alltäglich Nutze einstellen, welche mit der SMS vergleichbar ist.
 % section Fazit }}}
 
 \clearpage
+\bibliographystyle{dinat}
 \bibliography{cites}
 
 \end{document}
