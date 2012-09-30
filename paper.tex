@@ -160,7 +160,7 @@ dem Telefon übernehmen die Verarbeitung Dieser.
 Neben den normalen Kurznachrichten bietet der SMS-Standard noch drei weitere Textnachrichtentypen:
 \begin{itemize}
 	\item \textbf{Flash Message:} erscheint direkt auf Display des Empfängers. Die meisten Mobiltelefone 
-        können solche Nachrichten nicht speichern. Ein Anwendungsbeispiel für solche Flash Messages ist die 
+        können solche Nachrichten nicht speichern. Ein Anwendungsbeispiel für Flash Messages ist die 
         Anzeige des Restguthabens direkt nach einem Gespräch.
 	\item \textbf{Silent Message:} erscheinen weder auf dem Display noch durch akkustisches Signal. 
 		Silent Messages werden z.B. von Polizei und Geheimdiensten zur Personenortung genutzt.
@@ -272,20 +272,20 @@ einem Fehler und fügt die Adressen der anfragenden SMSC automatisch der MWD-Lis
 eine SRI-for-SM-Anfrage ein gesetztes Priority Flag haben, dann antwortet das HLR mit der VLR-Adresse, 
 falls diese verfügbar ist.
 
-Das HR kann auf verschiedenen Wegen über die erneute Verfügbarkeit für Kurznachrichten eines Teilnehmers 
+Das HLR kann auf verschiedenen Wegen über die erneute Verfügbarkeit für Kurznachrichten eines Teilnehmers 
 informiert werden:
 \begin{itemize}
     \item Der Teilnehmer wurde vom Netzwerk getrennt. Eine Neuverbindung löst ein Location Update beim 
     HLR aus.
     \item Der Teilnehmer befand sich in einem ``Funkloch'', wurde jedoch nicht komplett vom Netzwerk
     getrennt. Beim erneuten Eintritt in einen abgedeckten Netzbereich antwortet es auf Page Requests
-    des VLRs. Das VLR sendet daraufhin eine Ready-for-SM Nachricht and das HLR.
+    des VLRs. Das VLR sendet daraufhin eine \textit{Ready-for-SM} Nachricht and das HLR.
     \item Wenn der Telefonspeicher voll war und der Teilnehmer daraufhin einige Nachrichten löscht, so
     wird eine Ready-for-SM-Nachricht vom VMSC/VLR an das HLR gesendet.
 \end{itemize}
 
-Sobald das HLR über die erneute Verfügbarkeit des Teilnehmers informiert wurde, sendet es eine AlertSC 
-MAP message an jedes in der MWD Liste des Teilnehmers registierte SMSC, wodurch der SMS-Zustellprozess
+Sobald das HLR über die erneute Verfügbarkeit des Teilnehmers informiert wurde, sendet es eine \textit{AlertSC} 
+MAP-Nachricht an jedes in der MWD Liste des Teilnehmers registierte SMSC, wodurch der SMS-Zustellprozess
 erneut gestartet wird\cite{3gpp:map}.
 
 % \subsection{Message aggregators}
@@ -437,8 +437,9 @@ gezogen.
 
  \begin{figure}
      \centering
-     \includegraphics[width=\textwidth]{plot/datenraten}
+     \includegraphics[width=\textwidth]{plot/datenraten-eps-converted-to.pdf}
      \caption{Vergleich der maximalen Datenraten von Mobilfunkstandards}
+
      \label{fig:datenraten}
  \end{figure}
 
@@ -637,7 +638,7 @@ Verbreitung erreichen. Da zu diesem Zeitpunkt keine Aussage über die Umsetzung 
 durch die Mobilfunkanbieter getroffen werden kann, ergeben sich vorallem zwei Punkte, welche über
 den Erfolg von Joyn entscheiden werden. Der erste Punkt ist die Preispolitik der
 Mobilfunkanbieter. Bei SMS existierte ein Monopol und dementsprechend war die Preisgestaltung. Wie
-in Abschnitt \ref{sec:datennetze} gezeigt, ist Joyn bei seiner Einführung nicht Konkurrenzlos.
+in Abschnitt \ref{sec:datennetze} gezeigt, ist Joyn bei seiner Einführung nicht konkurrenzlos.
 Viele Alternativen sind kostenlos oder haben sehr geringe Kosten, welche nicht vergleichbar mit
 normalen Mobilfunktarifen sind. Allerdings hat Joyn den Vorteil, dass es ein Dienst von den
 Mobilfunkbetreibern ist. Dadruch wäre es möglich, dass sich Joyn zu einem ähnlich Standard wie die
